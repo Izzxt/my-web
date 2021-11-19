@@ -1,0 +1,46 @@
+{% extends "base.html" %} {% block body %}
+<div class="flex flex-col items-center justify-center py-12 bg-white shadow-inner"></div>
+{% for data in data %}
+<div class="container w-11/12 md:max-w-6xl mx-auto my-10">
+  <div class="flex-1 justify-center">
+    <div class="order-title text-center">
+      <span class="text-2xl font-medium">Thank you, {{ user.first_name }} {{ user.last_name }}!</span>
+    </div>
+    <div class="order-desc text-center my-3">
+      <span class="">Your order has been received!</span>
+    </div>
+    <div class="summary w-96 bg-gray-100 p-3 font-mono shadow-xl mt-4 mx-auto my-auto">
+      <div class="title my-5 font-semibold">ORDER SUMMARY</div>
+      <div class="body border-t-2 pt-2">
+        <div class="flex justify-between text-sm py-2 px-1">
+          <div class="font-light">Subtotal</div>
+          <div class="font-light">RM {{ data.total_price }}</div>
+        </div>
+        <div class="flex justify-between text-sm py-2 px-1 border-t-2">
+          <div class="font-light">Shipping</div>
+          <div class="font-light">RM 0.00</div>
+        </div>
+        <div class="flex justify-between text-sm py-2 px-1 border-t-2">
+          <div class="font-light">Tax</div>
+          <div class="font-light">-</div>
+        </div>
+        <div class="flex justify-between text-sm py-4 border-t-2">
+          <div class="font-semibold">TOTAL</div>
+          <div class="font-semibold">RM {{ data.total_price }}</div>
+        </div>
+      </div>
+    </div>
+    <div class="order-number text-center mt-7">
+      <span>Order number </span>
+      <span class="font-semibold text-sm">{{ data.order_number }}</span>
+    </div>
+    <div class="text-center mt-7">
+      <a href="/user/purchase">View order details</a>
+    </div>
+  </div>
+</div>
+{% endfor %}
+<pre>
+  {{ dump(number) }}
+</pre>
+{% endblock %}
