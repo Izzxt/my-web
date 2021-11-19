@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% block body %}
+	<div class="flex flex-col items-center justify-center py-12 bg-white shadow-inner"></div>
+	<div class="flex container w-11/12 md:max-w-6xl mx-auto my-10">
+		<div>
+			<div>
+				<!-- Dropdown toggle button -->
+				<div class="flex items-center p-2 rounded-md">
+					<p class="mr-4 border-b-2 w-full pb-2">My Profile
+					</p>
+				</div>
+				<!-- Dropdown list -->
+				<div class="rounded-md">
+					<a href="#" class="block px-4 text-sm text-gray-400 hover:text-gray-500">
+						Profile
+					</a>
+					<a href="#" class="block px-4 text-sm text-gray-400 hover:text-gray-500">
+						Addresses
+					</a>
+					<a href="#" class="block px-4 text-sm text-gray-400 hover:text-gray-500">
+						Change Password
+					</a>
+				</div>
+			</div>
+			<div>
+				<!-- Dropdown toggle button -->
+				<div class="flex items-center p-2 rounded-md">
+					<p class="mr-4">My Purchases
+					</p>
+				</div>
+			</div>
+		</div>
+		<div class="w-10/12 shadow bg-gray-50">
+			<div class="shadow w-6/12 p-5 bg-gray-50">
+				<div class="border-b-2 border-fuchsia-600">My Profile
+					<p class="text-xs mb-2">Manage and protect your account</p>
+				</div>
+				<div class="profile m-3 p-3">
+					<form action="/register" method="post">
+						<div class="mb-10">
+							<input value="{{ data.nama }}" id="username" type="text" placeholder="Username" name="username" class="user register-form flex-1 w-full py-2 h-14 border-b-2 border-gray-400 focus:border-cg-1 text-gray-600 placeholder-gray-400 outline-none" required/>
+						</div>
+						<div class="flex justify-between mb-6">
+							<input id="first_name" type="text" placeholder="First name" name="first_name" class="register-form w-52 py-2 h-14 border-b-2 border-gray-400 focus:border-cg-1 text-gray-600 placeholder-gray-400 outline-none" required/>
+							<input id="last_name" type="text" placeholder="Last name" name="last_name" class="register-form w-52 py-2 h-14 border-b-2 border-gray-400 focus:border-cg-1 text-gray-600 placeholder-gray-400 outline-none" required/>
+						</div>
+						<div class="mb-6">
+							<input type="email" placeholder="Email" name="email" class="register-form flex-1 w-full py-2 h-14 border-b-2 border-gray-400 focus:border-cg-1 text-gray-600 placeholder-gray-400 outline-none" required/>
+						</div>
+						<div class="mb-10">
+							<input id="password" type="password" placeholder="Password" name="password" class="register-form flex-1 w-full py-2 h-14 border-b-2 border-gray-400 focus:border-cg-1 text-gray-600 placeholder-gray-400 outline-none" required/>
+						</div>
+						<div class="mb-10">
+							<input id="confirm-password" type="password" placeholder="Confirm Password" name="confirm_password" class="register-form flex-1 w-full py-2 h-14 border-b-2 border-gray-400 focus:border-cg-1 text-gray-600 placeholder-gray-400 outline-none" required/>
+						</div>
+						<button type="submit" class="bg-gray-700 hover:bg-lime cursor-pointer text-white w-full font-normal py-4 px-4 focus:outline-none focus:shadow-outline prevent-default transition duration-300"></button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}
