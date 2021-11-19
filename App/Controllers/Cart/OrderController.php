@@ -25,7 +25,7 @@ class OrderController
     $qty = implode(',', $_qty);
     $code = implode(',', $_code);
 
-    if (Order::insertOrder($id, $code, $orderNumber, $qty, $totalPrice[0]->total, '')) {
+    if (Order::insertOrder($id, $code, $orderNumber, $qty, $totalPrice[0]->tot, '')) {
       Cart::deleteUserCartById($id);
       redirect('/order/' . $orderNumber);
     }
