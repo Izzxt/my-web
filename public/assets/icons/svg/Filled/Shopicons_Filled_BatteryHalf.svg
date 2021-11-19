@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" height="48" width="48" viewBox="0 0 48 48">
+  <title>Shopicons_Filled_BatteryHalf</title>
+  <path d="M0,0H48V48H0Z" transform="translate(0 0)" style="fill: none"/>
+  <g>
+    <path d="M11,10V44H37V10H32V4H16v6Zm9-2h8v6h5V40H15V14h5Z" transform="translate(0 0)"/>
+    <rect x="18" y="25" width="12" height="12"/>
+  </g>
+</svg>

@@ -1,0 +1,114 @@
+{% extends "base.html" %} {% block body %}
+<div class="flex flex-col items-center justify-center mt-24 py-10 bg-gray-200 shadow-inner">
+  <div class="font-mono">Shopping Cart</div>
+  <div class="text-sm font-mono">Home / Cart</div>
+</div>
+<div class="container w-11/12 md:max-w-6xl mx-auto my-10">
+  <div class="flex">
+    {% if data is empty %}
+    <div class="flex flex-col items-center justify-center w-full h-80 shadow">
+      <div class="p-5">There are no items in this cart</div>
+      <a href="/product" class="bg-black-100 text-white p-4 rounded-md text-sm font-mono hover:bg-opacity-80 transition duration-300">CONTINUE SHOPPING</a>
+    </div>
+    {% else %}
+    <div class="item w-full">
+      <table class="table-auto w-full shadow">
+        <thead>
+          <tr>
+            <th class="w-7/12 text-gray-700">Product</th>
+            <th class="text-gray-700">Price</th>
+            <th class="text-gray-700">Quantity</th>
+            <th class="text-gray-700">Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in data %} {% for value in item.product %}
+          <tr class="border-b-2 h-24">
+            <td>
+              <div class="ml-4 text-gray-600 font-thin">{{ value.nama_produk }}</div>
+            </td>
+            <td class="text-center text-gray-600 font-thin">RM{{ value.harga }}</td>
+            <td class="text-center">
+              <form action="/cart/edit/{{item.id}}" method="post">
+                <div class="flex h-10 w-24 shadow bg-transparent mx-auto appearance-none">
+                  <input type="hidden" name="id" id="item-id" data-id="{{ item.id }}" value="{{ item.id }}" />
+                  <input type="hidden" name="kuantiti" id="kuantiti" value="{{ item.kuantiti }}" />
+                  <input type="hidden" name="price" id="price" value="{{ value.harga }}" />
+                  <button id="decr" class="number-decrement-{{item.id}} text-gray-700 hover:text-gray-300 h-full w-20 cursor-pointer outline-none disabled:text-gray-300" onclick="dec({{item.id}})">
+                    <span class="m-auto text-2xl font-thin">−</span>
+                  </button>
+                  <input
+                    type="number"
+                    class="input-number-{{ item.id }} item-product outline-none focus:outline-none text-center w-full font-semibold text-md hover:text-black focus:text-black md:text-basecursor-default flex items-center text-gray-700"
+                    name="kuantiti"
+                    data-id="{{ item.id }}"
+                    value="{{ item.kuantiti }}"
+                    min="0"
+                  />
+                  <button class="number-increment-{{item.id}} text-gray-700 hover:text-gray-300 h-full w-20 cursor-pointer" onclick="inc({{item.id}})">
+                    <span class="m-auto text-2xl font-thin">+</span>
+                  </button>
+                </div>
+              </form>
+            </td>
+            <td class="text-center text-gray-700">RM{{ item.jumlah_harga }}</td>
+            <td>
+              <form action="/cart/delete/{{item.id}}" method="post">
+                <button type="submit" class="flex items-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" height="26" viewBox="0 0 48 48" width="26">
+                    <path d="M0 0h48v48H0z" fill="none" />
+                    <g id="Shopicon">
+                      <path
+                        d="M30,4H18c-2.2,0-4,1.8-4,4v5H7v2h3v25c0,2.2,1.8,4,4,4h20c2.2,0,4-1.8,4-4V15h3v-2h-7V8C34,5.8,32.2,4,30,4z M16,8 c0-1.103,0.897-2,2-2h12c1.103,0,2,0.897,2,2v5H16V8z M36,40c0,1.103-0.897,2-2,2H14c-1.103,0-2-0.897-2-2V15h24V40z"
+                      />
+                      <rect x="19" y="21" width="2" height="14" />
+                      <rect x="27" y="21" width="2" height="14" />
+                    </g>
+                  </svg>
+                </button>
+              </form>
+            </td>
+          </tr>
+          {% endfor %} {% endfor %}
+        </tbody>
+      </table>
+      <div class="flex justify-between mt-4">
+        <a href="/product" class="bg-black-100 text-white p-4 rounded-md text-sm font-mono hover:bg-opacity-80 transition duration-300">CONTINUE SHOPPING</a>
+        {# <button id="updateCart" class="bg-black-100 text-white p-4 rounded-md text-sm font-mono hover:bg-opacity-80 transition duration-300">UPDATE CART</button> #}
+      </div>
+    </div>
+    <div class="summary bg-gray-100 ml-4 h-full w-1/4 px-3 font-mono shadow-md">
+      <div class="title my-5 font-semibold">SUMMARY</div>
+      <div class="body border-t-2 pt-2">
+        <div class="flex justify-between text-sm py-2 px-1">
+          <div class="font-light">Subtotal</div>
+          <div class="font-light">RM {{ total[0].total }}</div>
+        </div>
+        <div class="flex justify-between text-sm py-2 px-1 border-t-2">
+          <div class="font-light">Shipping</div>
+          <div class="font-light">RM 0.00</div>
+        </div>
+        <div class="flex justify-between text-sm py-2 px-1 border-t-2">
+          <div class="font-light">Tax</div>
+          <div class="font-light">-</div>
+        </div>
+        <div class="flex justify-between text-sm py-4 border-t-2">
+          <div class="font-semibold">TOTAL</div>
+          <div class="font-semibold">RM {{ total[0].total }}</div>
+        </div>
+      </div>
+      <div class="footer flex justify-center border-t-2 mb-4">
+        <a href="/shipping" class="bg-black-100 text-white text-center w-full p-4 rounded-md text-sm font-mono hover:bg-opacity-80 transition duration-300">PROCEED TO CHECKOUT</a>
+      </div>
+    </div>
+    {% endif %}
+  </div>
+</div>
+<pre>
+{# {% for cart in data %}
+{% for item in cart.product %}
+  {{ dump(data) }}
+{% endfor %}
+{% endfor %} #}
+</pre>
+{% endblock %}

@@ -1,0 +1,18 @@
+{
+    "require": {
+        "php": ">= 7.4.3",
+        "pecee/simple-router": "4.2.0.6",
+        "usmanhalalit/pixie": "^2.0",
+        "symfony/dotenv": "^5.2",
+        "twig/twig": "^3.0",
+        "twbs/bootstrap": "5.0.0-beta2",
+        "rakit/validation": "^1.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Core\\": "Core/",
+            "App\\": "App/",
+            "Library\\": "Library/"
+        }
+    }
+}

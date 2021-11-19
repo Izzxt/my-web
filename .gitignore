@@ -1,0 +1,5 @@
+.vscode/launch.json
+App/View/list.json
+node_modules
+vendor
+index.html

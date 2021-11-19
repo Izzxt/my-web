@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./assets/style.css" />
+    <style>
+      input[type="number"]::-webkit-inner-spin-button,
+      input[type="number"]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+    </style>
+    <title>Air Kelapa</title>
+  </head>
+
+  <body>
+    <header>
+      <nav class="navbar fixed top-0 w-full bg-opacity-90">
+        <div class="container mx-auto flex flex-wrap p-6 md:p-5 max-w-6xl">
+          <div class="flex items-center flex-shrink-0 text-black mr-6">
+            <a href="#" class="font-semibold text-2xl tracking-tight">
+              <h1>AIR KELAPA</h1>
+            </a>
+          </div>
+          <div class="block lg:hidden">
+            <button class="flex items-center px-3 py-2 border rounded text-teal-200 border-teal-400 hover:text-white hover:border-white">
+              <svg class="fill-current h-3 w-3" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <title>Menu</title>
+                <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
+              </svg>
+            </button>
+          </div>
+          <div class="w-full flex-grow lg:flex lg:items-center lg:w-auto hidden mt-6 lg:mt-0" id="nav-content">
+            <ul class="list-reset lg:flex justify-end flex-1 items-center">
+              <li class="mr-3">
+                <a href="/" class="inline-block py-2 px-4 font-mono hover:text-gray-500 transition duration-300"> HOME </a>
+              </li>
+              <li class="mr-3">
+                <a href="/product" class="inline-block font-mono no-underline hover:white py-2 px-4 hover:text-gray-500 transition duration-300"> OUR DRINK </a>
+              </li>
+              <li class="mr-3">
+                <a href="#" class="inline-block font-mono no-underline hover:white py-2 px-4 hover:text-gray-500 transition duration-300"> OUR STORY </a>
+              </li>
+            </ul>
+          </div>
+
+          {% if user %}
+          <!-- Logged in -->
+          <div class="flex flex-1 justify-end items-center">
+            <div class="flex items-center relative text-sm rounded-full p-2">
+              {# Search Icon #}
+              <span class="m-2 cursor-pointer">
+                <svg class="fill-current hover:text-lime" xmlns="http://www.w3.org/2000/svg" height="26" viewbox="0 0 48 48" width="26">
+                  <path d="M0 0h48v48H0z" fill="none" />
+                  <g id="Shopicon">
+                    <path
+                      d="M18,32c3.506,0,6.703-1.298,9.159-3.427L40,41.414L41.414,40L28.573,27.159C30.702,24.703,32,21.506,32,18 c0-7.732-6.268-14-14-14S4,10.268,4,18S10.268,32,18,32z M18,6c6.617,0,12,5.383,12,12s-5.383,12-12,12S6,24.617,6,18 S11.383,6,18,6z"
+                    />
+                  </g>
+                </svg>
+              </span>
+
+              {# User Icon #}
+              <div class="flex items-center cursor-pointer" x-data="{ open: false }">
+                <a @mouseover="open = true" @click.away="open = false" class="login m-2">
+                  <svg class="fill-current hover:text-lime" xmlns="http://www.w3.org/2000/svg" height="26" viewbox="0 0 48 48" width="26">
+                    <path d="M0 0h48v48H0z" fill="none" />
+                    <g id="Shopicon">
+                      <path
+                        d="M29.089,24.747C32.6,22.909,35,19.238,35,15c0-6.075-4.925-11-11-11S13,8.925,13,15c0,4.238,2.4,7.909,5.911,9.747 C10.89,27.09,5,34.809,5,44h38C43,34.809,37.11,27.09,29.089,24.747z M15,15c0-4.963,4.037-9,9-9s9,4.037,9,9c0,4.963-4.037,9-9,9 S15,19.963,15,15z M24,26c8.735,0,15.953,7.013,16.896,16H7.104C8.047,33.013,15.265,26,24,26z"
+                      />
+                    </g>
+                  </svg>
+                </a>
+                <div
+                  x-show="open"
+                  @mouseleave="open = false"
+                  @click.outside="open = false"
+                  x-transition:enter="transition ease-out duration-100"
+                  x-transition:enter-start="transform opacity-0 scale-95"
+                  x-transition:enter-end="transform opacity-100 scale-100"
+                  x-transition:leave="transition ease-in duration-75"
+                  x-transition:leave-start="transform opacity-100 scale-100"
+                  x-transition:leave-end="transform opacity-0 scale-95"
+                  class="absolute w-44 px-5 py-3 bg-white shadow border mt-52"
+                >
+                  <ul class="space-y-3 dark:text-white">
+                    <li class="font-medium">
+                      <a href="#" class="flex items-center transform transition-colors duration-200 border-r-4 border-transparent hover:text-lime">
+                        <div class="mr-3">
+                          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                          </svg>
+                        </div>
+                        {{user.nama }}
+                      </a>
+                    </li>
+                    <li class="font-medium">
+                      <a href="#" class="flex items-center transform transition-colors duration-200 border-r-4 border-transparent hover:text-lime">
+                        <div class="mr-3">
+                          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="2"
+                              d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
+                            ></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                          </svg>
+                        </div>
+                        Setting
+                      </a>
+                    </li>
+                    <hr class="dark:border-gray-700" />
+                    <li class="font-medium">
+                      <a href="/logout" class="flex items-center transform transition-colors duration-200 border-r-4 border-transparent hover:text-red-600">
+                        <div class="mr-3 text-red-600">
+                          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
+                          </svg>
+                        </div>
+                        Logout
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              {# Cart Icon #}
+              <div class="relative cursor-pointer">
+                <div class="absolute bg-lime rounded-full w-5 text-center left-3 bottom-4 text-white">{{ cart_count }}</div>
+                <a href="/cart">
+                  <svg class="fill-current hover:text-lime" xmlns="http://www.w3.org/2000/svg" height="26" viewbox="0 0 48 48" width="26">
+                    <path d="M0 0h48v48H0z" fill="none" />
+                    <g id="Shopicon">
+                      <path d="M5,6v2h6v18c0,4.962,4.037,9,9,9h17v-2H20c-3.859,0-7-3.14-7-7v-2l25.176,0L44,6H5z M41.251,8l-4.529,14L13,22V8H41.251z" />
+                      <circle cx="18" cy="42" r="2" />
+                      <circle cx="30" cy="42" r="2" />
+                    </g></svg
+                ></a>
+              </div>
+            </div>
+          </div>
+          <!-- End of Logged in -->
+          {% else %}
+          <!-- Not Logged in -->
+          <div class="flex flex-1 justify-end items-center">
+            <div class="flex items-center relative text-sm rounded-full p-2">
+              {# Search Icon #}
+              <span class="m-2 cursor-pointer">
+                <svg class="fill-current hover:text-lime" xmlns="http://www.w3.org/2000/svg" height="26" viewbox="0 0 48 48" width="26">
+                  <path d="M0 0h48v48H0z" fill="none" />
+                  <g id="Shopicon">
+                    <path
+                      d="M18,32c3.506,0,6.703-1.298,9.159-3.427L40,41.414L41.414,40L28.573,27.159C30.702,24.703,32,21.506,32,18 c0-7.732-6.268-14-14-14S4,10.268,4,18S10.268,32,18,32z M18,6c6.617,0,12,5.383,12,12s-5.383,12-12,12S6,24.617,6,18 S11.383,6,18,6z"
+                    />
+                  </g>
+                </svg>
+              </span>
+
+              {# User Icon #}
+              <div class="flex items-center cursor-pointer" x-data="{ open: false }">
+                <a @mouseover="open = true" @click.away="open = false" class="login- m-2">
+                  <svg class="fill-current hover:text-lime" xmlns="http://www.w3.org/2000/svg" height="26" viewbox="0 0 48 48" width="26">
+                    <path d="M0 0h48v48H0z" fill="none" />
+                    <g id="Shopicon">
+                      <path
+                        d="M29.089,24.747C32.6,22.909,35,19.238,35,15c0-6.075-4.925-11-11-11S13,8.925,13,15c0,4.238,2.4,7.909,5.911,9.747 C10.89,27.09,5,34.809,5,44h38C43,34.809,37.11,27.09,29.089,24.747z M15,15c0-4.963,4.037-9,9-9s9,4.037,9,9c0,4.963-4.037,9-9,9 S15,19.963,15,15z M24,26c8.735,0,15.953,7.013,16.896,16H7.104C8.047,33.013,15.265,26,24,26z"
+                      />
+                    </g>
+                  </svg>
+                </a>
+                <div
+                  x-show="open"
+                  @mouseleave="open = false"
+                  @click.outside="open = false"
+                  x-transition:enter="transition ease-out duration-100"
+                  x-transition:enter-start="transform opacity-0 scale-95"
+                  x-transition:enter-end="transform opacity-100 scale-100"
+                  x-transition:leave="transition ease-in duration-75"
+                  x-transition:leave-start="transform opacity-100 scale-100"
+                  x-transition:leave-end="transform opacity-0 scale-95"
+                  class="absolute w-44 px-5 py-3 bg-white shadow border mt-36"
+                >
+                  <ul class="space-y-3 dark:text-white">
+                    <li class="font-medium">
+                      <a href="#" class="login-open flex items-center transform transition-colors duration-200 border-r-4 border-transparent hover:text-lime"> Login </a>
+                    </li>
+                    <li class="font-medium">
+                      <a href="#" class="register-open flex items-center transform transition-colors duration-200 border-r-4 border-transparent hover:text-lime"> Create an account </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="login-modal opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center">
+                <div class="login-overlay absolute w-full h-full bg-gray-900 opacity-50"></div>
+
+                <div class="modal-container bg-white w-11/12 md:max-w-md mx-auto p-2 shadow-lg z-50 overflow-y-auto">
+                  <div class="flex justify-end items-center pb-3">
+                    <div class="login-close cursor-pointer z-50">
+                      <svg class="fill-current text-black" xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewbox="0 0 18 18">
+                        <path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"></path>
+                      </svg>
+                    </div>
+                  </div>
+
+                  <div class="modal-content py-4 text-left px-16">
+                    <p class="text-2xl font-bold text-center mb-10">Log in</p>
+
+                    <form action="/login" method="post">
+                      <div class="mb-6">
+                        <input
+                          class="flex-1 w-full py-2 h-14 border-b-2 border-gray-400 focus:border-cg-1 text-gray-600 placeholder-gray-400 outline-none"
+                          id="email"
+                          type="email"
+                          placeholder="Email"
+                          name="email"
+                        />
+                      </div>
+                      <div class="mb-10">
+                        <input
+                          class="flex-1 w-full py-2 h-14 border-b-2 border-gray-400 focus:border-cg-1 text-gray-600 placeholder-gray-400 outline-none"
+                          id="password"
+                          type="password"
+                          placeholder="Password"
+                          name="password"
+                        />
+                      </div>
+                      <input
+                        type="submit"
+                        value="Log in"
+                        class="bg-gray-700 hover:bg-lime cursor-pointer text-white w-full font-normal py-4 px-4 focus:outline-none focus:shadow-outline transition duration-300"
+                      />
+                    </form>
+
+                    <div class="flex justify-between items-center pb-3">
+                      <div class="text-sm">
+                        <a class="register-open text-gray-500 hover:text-gray-600">Register</a>
+                      </div>
+                      <div class="text-sm">
+                        <a href="#" class="text-cg-3 hover:text-cg-2">Forgot Password?</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {# register #}
+              <div class="register-modal opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center transition-all ease-in-out duration-300">
+                <div class="register-overlay absolute w-full h-full bg-gray-900 opacity-50"></div>
+
+                <div class="modal-container bg-white w-11/12 md:max-w-xl mx-auto p-2 shadow-lg z-50 overflow-y-auto">
+                  <div class="flex justify-end items-center pb-3">
+                    <div class="register-close cursor-pointer z-50">
+                      <svg class="fill-current text-black" xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewbox="0 0 18 18">
+                        <path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"></path>
+                      </svg>
+                    </div>
+                  </div>
+
+                  <div class="modal-content py-4 text-left px-16">
+                    <p class="text-2xl font-bold text-center mb-10">Register</p>
+
+                    <form action="/register" method="post">
+                      <div class="mb-10">
+                        <input
+                          id="username"
+                          type="text"
+                          placeholder="Username"
+                          name="username"
+                          class="register-form flex-1 w-full py-2 h-14 border-b-2 border-gray-400 focus:border-cg-1 text-gray-600 placeholder-gray-400 outline-none"
+                          required
+                        />
+                      </div>
+                      <div class="flex justify-between mb-6">
+                        <input
+                          id="first_name"
+                          type="text"
+                          placeholder="First name"
+                          name="first_name"
+                          class="register-form w-52 py-2 h-14 border-b-2 border-gray-400 focus:border-cg-1 text-gray-600 placeholder-gray-400 outline-none"
+                          required
+                        />
+                        <input
+                          id="last_name"
+                          type="text"
+                          placeholder="Last name"
+                          name="last_name"
+                          class="register-form w-52 py-2 h-14 border-b-2 border-gray-400 focus:border-cg-1 text-gray-600 placeholder-gray-400 outline-none"
+                          required
+                        />
+                      </div>
+                      <div class="mb-6">
+                        <input
+                          type="email"
+                          placeholder="Email"
+                          name="email"
+                          class="register-form flex-1 w-full py-2 h-14 border-b-2 border-gray-400 focus:border-cg-1 text-gray-600 placeholder-gray-400 outline-none"
+                          required
+                        />
+                      </div>
+                      <div class="mb-10">
+                        <input
+                          id="password"
+                          type="password"
+                          placeholder="Password"
+                          name="password"
+                          class="register-form flex-1 w-full py-2 h-14 border-b-2 border-gray-400 focus:border-cg-1 text-gray-600 placeholder-gray-400 outline-none"
+                          required
+                        />
+                      </div>
+                      <div class="mb-10">
+                        <input
+                          id="confirm-password"
+                          type="password"
+                          placeholder="Confirm Password"
+                          name="confirm_password"
+                          class="register-form flex-1 w-full py-2 h-14 border-b-2 border-gray-400 focus:border-cg-1 text-gray-600 placeholder-gray-400 outline-none"
+                          required
+                        />
+                      </div>
+                      <button
+                        type="submit"
+                        class="bg-gray-700 hover:bg-lime cursor-pointer text-white w-full font-normal py-4 px-4 focus:outline-none focus:shadow-outline prevent-default transition duration-300"
+                      >
+                        Register
+                      </button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+
+              {# Cart Icon #}
+              <div class="login-open relative cursor-pointer">
+                <svg class="fill-current hover:text-lime" xmlns="http://www.w3.org/2000/svg" height="26" viewbox="0 0 48 48" width="26">
+                  <path d="M0 0h48v48H0z" fill="none" />
+                  <g id="Shopicon">
+                    <path d="M5,6v2h6v18c0,4.962,4.037,9,9,9h17v-2H20c-3.859,0-7-3.14-7-7v-2l25.176,0L44,6H5z M41.251,8l-4.529,14L13,22V8H41.251z" />
+                    <circle cx="18" cy="42" r="2" />
+                    <circle cx="30" cy="42" r="2" />
+                  </g>
+                </svg>
+              </div>
+            </div>
+          </div>
+          <!-- End of Not Logged in -->
+          {% endif %}
+        </div>
+      </nav>
+    </header>
+
+    <div class="notification absolute h-10 bg-white">{% block notification %}{% endblock %}</div>
+    <div class="main">{% block body %}{% endblock %}</div>
+
+    <footer class="bg-black-100 border-b-8 border-lime">
+      <div class="max-w-6xl mx-auto my-auto text-white">
+        <div class="flex items-center pt-10 mx-2">
+          {#
+          <div><img src="./assets/images/kkhl.png" alt="kkhl" width="200" /></div>
+          #}
+          <div class="font-bold py-10">
+            <h1 class="text-3xl">AIR KELAPA</h1>
+          </div>
+        </div>
+        <div class="flex pb-20 mx-2">
+          <div class="w-44 border-r border-gray-500">
+            <h4 class="pb-4 font-semibold font-mono">Navigation</h4>
+            <ul class="italic text-gray-300 text-sm">
+              <li class="mb-1 hover:text-gray-100">
+                <a href="">Home</a>
+              </li>
+              <li class="mb-1 hover:text-gray-100">
+                <a href="">Our Drink</a>
+              </li>
+              <li class="mb-1 hover:text-gray-100">
+                <a href="">Our Story</a>
+              </li>
+            </ul>
+          </div>
+          <div class="w-44 ml-5 border-r border-gray-500">
+            <h4 class="pb-4 font-semibold font-mono">Contact Us</h4>
+            <ul class="flex italic text-gray-300">
+              <li class="mr-2">
+                <a href=""
+                  ><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="36px" height="36px">
+                    <path fill="#3f51b5" d="M24 4A20 20 0 1 0 24 44A20 20 0 1 0 24 4Z" />
+                    <path fill="#fff" d="M29.368,24H26v12h-5V24h-3v-4h3v-2.41c0.002-3.508,1.459-5.59,5.592-5.59H30v4h-2.287 C26.104,16,26,16.6,26,17.723V20h4L29.368,24z" /></svg
+                ></a>
+              </li>
+              <li class="mr-2">
+                <a href=""
+                  ><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="36px" height="36px">
+                    <radialGradient id="yOrnnhliCrdS2gy~4tD8ma" cx="19.38" cy="42.035" r="44.899" gradientUnits="userSpaceOnUse">
+                      <stop offset="0" stop-color="#fd5" />
+                      <stop offset=".328" stop-color="#ff543f" />
+                      <stop offset=".348" stop-color="#fc5245" />
+                      <stop offset=".504" stop-color="#e64771" />
+                      <stop offset=".643" stop-color="#d53e91" />
+                      <stop offset=".761" stop-color="#cc39a4" />
+                      <stop offset=".841" stop-color="#c837ab" />
+                    </radialGradient>
+                    <path
+                      fill="url(#yOrnnhliCrdS2gy~4tD8ma)"
+                      d="M34.017,41.99l-20,0.019c-4.4,0.004-8.003-3.592-8.008-7.992l-0.019-20	c-0.004-4.4,3.592-8.003,7.992-8.008l20-0.019c4.4-0.004,8.003,3.592,8.008,7.992l0.019,20	C42.014,38.383,38.417,41.986,34.017,41.99z"
+                    />
+                    <radialGradient id="yOrnnhliCrdS2gy~4tD8mb" cx="11.786" cy="5.54" r="29.813" gradientTransform="matrix(1 0 0 .6663 0 1.849)" gradientUnits="userSpaceOnUse">
+                      <stop offset="0" stop-color="#4168c9" />
+                      <stop offset=".999" stop-color="#4168c9" stop-opacity="0" />
+                    </radialGradient>
+                    <path
+                      fill="url(#yOrnnhliCrdS2gy~4tD8mb)"
+                      d="M34.017,41.99l-20,0.019c-4.4,0.004-8.003-3.592-8.008-7.992l-0.019-20	c-0.004-4.4,3.592-8.003,7.992-8.008l20-0.019c4.4-0.004,8.003,3.592,8.008,7.992l0.019,20	C42.014,38.383,38.417,41.986,34.017,41.99z"
+                    />
+                    <path fill="#fff" d="M24,31c-3.859,0-7-3.14-7-7s3.141-7,7-7s7,3.14,7,7S27.859,31,24,31z M24,19c-2.757,0-5,2.243-5,5	s2.243,5,5,5s5-2.243,5-5S26.757,19,24,19z" />
+                    <circle cx="31.5" cy="16.5" r="1.5" fill="#fff" />
+                    <path
+                      fill="#fff"
+                      d="M30,37H18c-3.859,0-7-3.14-7-7V18c0-3.86,3.141-7,7-7h12c3.859,0,7,3.14,7,7v12	C37,33.86,33.859,37,30,37z M18,13c-2.757,0-5,2.243-5,5v12c0,2.757,2.243,5,5,5h12c2.757,0,5-2.243,5-5V18c0-2.757-2.243-5-5-5H18z"
+                    /></svg
+                ></a>
+              </li>
+              <li class="mr-2">
+                <a href=""
+                  ><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="36px" height="36px">
+                    <path fill="#03a9f4" d="M24 4A20 20 0 1 0 24 44A20 20 0 1 0 24 4Z" />
+                    <path
+                      fill="#fff"
+                      d="M36,17.12c-0.882,0.391-1.999,0.758-3,0.88c1.018-0.604,2.633-1.862,3-3 c-0.951,0.559-2.671,1.156-3.793,1.372C31.311,15.422,30.033,15,28.617,15C25.897,15,24,17.305,24,20v2c-4,0-7.9-3.047-10.327-6 c-0.427,0.721-0.667,1.565-0.667,2.457c0,1.819,1.671,3.665,2.994,4.543c-0.807-0.025-2.335-0.641-3-1c0,0.016,0,0.036,0,0.057 c0,2.367,1.661,3.974,3.912,4.422C16.501,26.592,16,27,14.072,27c0.626,1.935,3.773,2.958,5.928,3c-1.686,1.307-4.692,2-7,2 c-0.399,0-0.615,0.022-1-0.023C14.178,33.357,17.22,34,20,34c9.057,0,14-6.918,14-13.37c0-0.212-0.007-0.922-0.018-1.13 C34.95,18.818,35.342,18.104,36,17.12"
+                    /></svg
+                ></a>
+              </li>
+            </ul>
+          </div>
+          <div class="w-80 ml-5">
+            <h4 class="pb-4 font-semibold font-mono">Join Us</h4>
+            <ul class="italic text-gray-300">
+              <li>
+                <button class="rounded-2xl px-4 py-2 bg-lime text-black hover:bg-white transition duration-500">Join us now <i class="fas fa-chevron-right"></i></button>
+              </li>
+              <li class="mt-2 text-sm">
+                <p>Get the latest news and specials in your inbox.</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="flex justify-between py-10 text-white max-w-6xl mx-auto my-auto border-t border-gray-500">
+        <div>
+          <p>Copyright &copy; 2021</p>
+        </div>
+        <div>Education Only 🎓</div>
+      </div>
+    </footer>
+  </body>
+
+  <script src="https://kit.fontawesome.com/ea0939ab68.js" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+  <script src="https://kit.fontawesome.com/ea0939ab68.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"></script>
+  <script src="./assets/js/app.js"></script>
+</html>

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" height="48" width="48" viewBox="0 0 48 48">
+  <title>Shopicons_Light_BatteryThreeQuarters</title>
+  <path d="M0,0H48V48H0Z" transform="translate(0 0)" style="fill: none"/>
+  <g>
+    <path d="M31,11V5H17v6H12V43H36V11Zm3,2V41H14V13h5V7H29v6Z" transform="translate(0 0)"/>
+    <rect x="19" y="22" width="10" height="14"/>
+  </g>
+</svg>
