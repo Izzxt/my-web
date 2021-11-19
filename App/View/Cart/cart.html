@@ -25,24 +25,24 @@
           {% for item in data %} {% for value in item.product %}
           <tr class="border-b-2 h-24">
             <td>
-              <div class="ml-4 text-gray-600 font-thin">{{ value.nama_produk }}</div>
+              <div class="ml-4 text-gray-600 font-thin">{{ value.product_name }}</div>
             </td>
-            <td class="text-center text-gray-600 font-thin">RM{{ value.harga }}</td>
+            <td class="text-center text-gray-600 font-thin">RM{{ value.price }}</td>
             <td class="text-center">
               <form action="/cart/edit/{{item.id}}" method="post">
                 <div class="flex h-10 w-24 shadow bg-transparent mx-auto appearance-none">
                   <input type="hidden" name="id" id="item-id" data-id="{{ item.id }}" value="{{ item.id }}" />
-                  <input type="hidden" name="kuantiti" id="kuantiti" value="{{ item.kuantiti }}" />
-                  <input type="hidden" name="price" id="price" value="{{ value.harga }}" />
+                  <input type="hidden" name="quantity" id="quantity" value="{{ item.quantity }}" />
+                  <input type="hidden" name="price" id="price" value="{{ value.price }}" />
                   <button id="decr" class="number-decrement-{{item.id}} text-gray-700 hover:text-gray-300 h-full w-20 cursor-pointer outline-none disabled:text-gray-300" onclick="dec({{item.id}})">
                     <span class="m-auto text-2xl font-thin">−</span>
                   </button>
                   <input
                     type="number"
                     class="input-number-{{ item.id }} item-product outline-none focus:outline-none text-center w-full font-semibold text-md hover:text-black focus:text-black md:text-basecursor-default flex items-center text-gray-700"
-                    name="kuantiti"
+                    name="quantity"
                     data-id="{{ item.id }}"
-                    value="{{ item.kuantiti }}"
+                    value="{{ item.quantity }}"
                     min="0"
                   />
                   <button class="number-increment-{{item.id}} text-gray-700 hover:text-gray-300 h-full w-20 cursor-pointer" onclick="inc({{item.id}})">
@@ -51,7 +51,7 @@
                 </div>
               </form>
             </td>
-            <td class="text-center text-gray-700">RM{{ item.jumlah_harga }}</td>
+            <td class="text-center text-gray-700">RM{{ item.total_price }}</td>
             <td>
               <form action="/cart/delete/{{item.id}}" method="post">
                 <button type="submit" class="flex items-center">

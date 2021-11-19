@@ -94,7 +94,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
                           </svg>
                         </div>
-                        {{user.nama }}
+                        {{ user.username }}
                       </a>
                     </li>
                     <li class="font-medium">
@@ -276,18 +276,18 @@
                       </div>
                       <div class="flex justify-between mb-6">
                         <input
-                          id="first_name"
+                          id="name"
                           type="text"
-                          placeholder="First name"
-                          name="first_name"
+                          placeholder="First name & Last name"
+                          name="name"
                           class="register-form w-52 py-2 h-14 border-b-2 border-gray-400 focus:border-cg-1 text-gray-600 placeholder-gray-400 outline-none"
                           required
                         />
                         <input
-                          id="last_name"
+                          id="phone_number"
                           type="text"
-                          placeholder="Last name"
-                          name="last_name"
+                          placeholder="Phone Number"
+                          name="phone_number"
                           class="register-form w-52 py-2 h-14 border-b-2 border-gray-400 focus:border-cg-1 text-gray-600 placeholder-gray-400 outline-none"
                           required
                         />

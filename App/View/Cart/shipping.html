@@ -1,8 +1,8 @@
 {% extends "base.html" %} {% block body %}
 <div class="flex flex-col items-center justify-center py-12 bg-white shadow-inner"></div>
 <div class="container w-11/12 md:max-w-6xl mx-auto my-10">
-  <div class="flex">
-    <form action="/cart/order" method="post">
+  <div>
+    <form action="/cart/order" method="post" class="flex">
       <div class="item w-full">
         <div class="address-main bg-gray-100 w-full p-4 rounded-lg shadow-md">
           <div class="address-title my-4 px-4">Shipping Address</div>
@@ -25,7 +25,7 @@
             </div>
           </div>
         </div>
-        <div class="payment-method bg-gray-100 w-full p-4 rounded-lg mt-2 shadow-md">
+        <div class="payment-method bg-gray-100 w-full p-4 rounded-lg mt-4 shadow-md">
           <div class="payment-title my-4 px-4">Select Payments Method</div>
           <div class="payment-body border-t my-2 px-4">
             <div class="grid grid-cols-3 gap-2 mt-5">
@@ -78,8 +78,9 @@
                 <tbody>
                   <tr>
                     <input type="hidden" name="product_id" value="{{ item.id }}" />
-                    <td class="py-2">{{ value.nama_produk }} <span class="text-xs">({{ item.kuantiti }}x)</span></td>
-                    <td class="w-20 py-2 text-right">RM {{ item.jumlah_harga }}</td>
+                    <input type="hidden" name="code_product" value="{{ item.code_product }}" />
+                    <td class="py-2">{{ value.product_name }} <span class="text-xs">({{ item.quantity }}x)</span></td>
+                    <td class="w-20 py-2 text-right">RM {{ item.total_price }}</td>
                   </tr>
                 </tbody>
               </table>
@@ -87,7 +88,7 @@
             </div>
           </div>
         </div>
-        <div class="summary bg-gray-100 p-3 font-mono shadow-md mt-2">
+        <div class="summary bg-gray-100 p-3 font-mono shadow-md mt-4">
           <div class="title my-5 font-semibold">SUMMARY</div>
           <div class="body border-t-2 pt-2">
             <div class="flex justify-between text-sm py-2 px-1">

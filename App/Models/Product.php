@@ -7,15 +7,15 @@ use PDO;
 
 class Product
 {
-  private static $data = array('id', 'nama_produk', 'harga', 'gambar', 'penerangan', 'code_product', 'create_time', 'update_time');
+  private static $data = array('id', 'product_name', 'code_product', 'price', 'images', 'images', 'description', 'create_date', 'update_date');
 
   public static function getAllProducts($limit = 9, $data = null)
   {
-    return DB::table('produk')->select($data ?? static::$data)->limit($limit)->orderBy('id', 'desc')->get();
+    return DB::table('product')->select($data ?? static::$data)->limit($limit)->orderBy('id', 'desc')->get();
   }
 
   public static function getProductByCode($code, $data = null)
   {
-    return DB::table('produk')->select($data ?? static::$data)->setFetchMode(PDO::FETCH_CLASS, get_called_class())->where('code_product', $code)->get();
+    return DB::table('product')->select($data ?? static::$data)->setFetchMode(PDO::FETCH_CLASS, get_called_class())->where('code_product', $code)->get();
   }
 }

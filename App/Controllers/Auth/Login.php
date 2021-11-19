@@ -15,8 +15,8 @@ class Login
 
    public function request()
    {
-      $player = User::getDataByEmail(input('email'), array('id', 'email', 'kata_laluan'));
-      if ($player == null || !Hash::verify(input('password'), $player->kata_laluan))
+      $player = User::getDataByEmail(input('email'), array('id', 'email', 'password'));
+      if ($player == null || !Hash::verify(input('password'), $player->password))
       {
           response()->json(["status" => "error", "message" => "invalid password"]);
       }

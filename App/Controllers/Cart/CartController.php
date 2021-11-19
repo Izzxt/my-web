@@ -34,14 +34,14 @@ class CartController
 
   public function edit($id)
   {
-    $kuantiti = input()->post('kuantiti')->value;
+    $quantity = input()->post('quantity')->value;
     $price = input()->post('price')->value;
 
-    $total = $price * $kuantiti;
+    $total = $price * $quantity;
 
-    json_encode($kuantiti);
+    json_encode($quantity);
 
-    if (Cart::updateCart($id, $kuantiti, $total)) {
+    if (Cart::updateCart($id, $quantity, $total)) {
       return redirect('/cart');
     }
   }

@@ -1,4 +1,4 @@
-{% extends "base.html" %}  {% block body %}
+{% extends "base.html" %} {% block body %}
 <div class="flex flex-col items-center justify-center mt-24 py-10 bg-gray-200 shadow-inner">
   <div class="font-mono">Our Drink</div>
   <div class="text-sm font-mono">Home / Our Drink</div>
@@ -8,19 +8,19 @@
     {% for items in item %}
     <div class="col-span-1 shadow-lg">
       <div class="items-product flex">
-        <div class="items-left flex items-center justify-center h-48 w-44 bg-cover bg-center"><img src="{{ items.gambar }}" alt="1" width="115" /></div>
+        <div class="items-left flex items-center justify-center h-48 w-44 bg-cover bg-center"><img src="{{ items.images }}" alt="1" width="115" /></div>
         <div class="items-right items-center">
           <div class="header mt-4 mb-4">
-            <a href="/ourdrink/{{ items.id }}">{{ items.nama_produk }}</a>
+            <a href="/ourdrink/{{ items.id }}">{{ items.product_name }}</a>
           </div>
           <div class="body mb-5">{{ items.penerangan }}</div>
           <div class="footer flex justify-between w-44">
-            <div class="items-price">RM {{ items.harga }}</div>
+            <div class="items-price">RM {{ items.price }}</div>
             <div class="items-btn">
               <form action="/cart/add" method="post" id="add-product">
                 <input type="hidden" name="id" value="{{ items.id }}" />
                 <input id="prod" type="hidden" name="code_product" data-item-id="{{ items.id }}" data-code="{{ items.code_product }}" value="{{ items.code_product }}" />
-                <input type="hidden" name="price" id="price" value="{{ items.harga }}" />
+                <input type="hidden" name="price" id="price" value="{{ items.price }}" />
                 <button type="submit" id="cart">
                   <svg class="fill-current hover:text-lime cursor cursor-pointer" xmlns="http://www.w3.org/2000/svg" height="26" viewBox="0 0 48 48" width="26">
                     <path d="M0 0h48v48H0z" fill="none" />

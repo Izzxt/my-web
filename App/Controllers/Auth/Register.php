@@ -15,8 +15,8 @@ class Register
 
     $dataValid =  [
       'username'         => 'required|min:3|max:20',
-      'first_name'       => 'required|min:3|max:20',
-      'last_name'        => 'required|min:3|max:20',
+      'name'             => 'required|min:3|max:20',
+      'phone_number'     => 'required|min:3|max:20',
       'email'            => 'required|max:150|email',
       'password'         => 'required|min:6|max:20',
       'confirm_password' => 'required|min:6|max:20|same:password',
@@ -40,7 +40,7 @@ class Register
       // echo json_encode(["status" => "error", "message" => "something went wrong"]);
     }
 
-    $user = User::getDataByUsername($username, array('id', 'kata_laluan'));
+    $user = User::getDataByUsername($username, array('id', 'password'));
 
     Auth::login($user);
     redirect('/');

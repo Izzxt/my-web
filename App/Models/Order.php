@@ -7,11 +7,11 @@ use PDO;
 
 class Order
 {
-  private static $data = array('id', 'id_pelanggan',  'order_number', 'quantity', 'total_price', 'payment_status', 'status', 'code_product', 'timestamp');
+  private static $data = array('id', 'customer_id',  'order_number', 'code_product', 'shipping_address',  'quantity', 'total_price', 'payment_status', 'status', 'timestamp');
 
   public static function getDataById($id, $data = null)
   {
-    return DB::table('order_details')->select($data ?? static::$data)->where('id_pelanggan', $id)->get();
+    return DB::table('order_details')->select($data ?? static::$data)->where('costomer_id', $id)->get();
   }
 
   public static function getDataByOrderNumber($orderNumber, $data = null)
