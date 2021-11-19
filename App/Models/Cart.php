@@ -15,9 +15,9 @@ class Cart
     return DB::table('customer_cart')->select($data ?? static::$data)->where('customer_id', $id)->get();
   }
 
-  public static function getCodeProduct($code, $data = null)
+  public static function getCodeProduct($id, $code, $data = null)
   {
-    return DB::table('customer_cart')->select($data ?? static::$data)->setFetchMode(PDO::FETCH_CLASS, get_called_class())->where('code_product', $code)->first();
+    return DB::table('customer_cart')->select($data ?? static::$data)->setFetchMode(PDO::FETCH_CLASS, get_called_class())->where('customer_id', $id)->where('code_product', $code)->count();
   }
 
   public static function getTotalById($id)
@@ -54,15 +54,15 @@ class Cart
     return $cart;
   }
 
-  public static function addCart($code, $price)
+  public static function addCart($id, $code, $price)
   {
     $data = array(
-      'customer_id' => Session::get('id'),
+      'customer_id' => $id,
       'code_product' => $code,
       'quantity' => 1,
       'total_price' => $price,
-      'create_time' => time(),
-      'update_time' => time()
+      'create_date' => time(),
+      'update_date' => time()
     );
 
     $id = DB::table('customer_cart')->setFetchMode(PDO::FETCH_CLASS, get_called_class())->insert($data);
@@ -73,5 +73,10 @@ class Cart
   public static function deleteCart($id)
   {
     return DB::table('customer_cart')->where('id', $id)->delete();
+  }
+
+  public static function deleteUserCartById($id)
+  {
+    return DB::table('customer_cart')->where('customer_id', $id)->delete();
   }
 }

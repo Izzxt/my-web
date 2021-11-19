@@ -14,20 +14,17 @@ class CartController
 
   public function add()
   {
+    $id = Session::get('id');
     $data = input()->post('code_product')->value;
     $product = Product::getProductByCode($data);
 
     foreach ($product as $row) {
-      if (Cart::getCodeProduct($data)) {
-        // $this->message = Utils::ErrorMessage('items already exist', '/product');
-        // Utils::Logger($this->message);
+      if (Cart::getCodeProduct($id, $data)) {
         redirect('/product');
         response()->json(['message' => 'items already exist']);
-      }
-      if (Cart::addCart($data, $row->harga)) {
-        // Utils::ErrorMessage('Added to cart.');
+      } else {
+        Cart::addCart($id, $data, $row->price);
         redirect('/product');
-        Session::set(['message' => 'Added to cart.']);
       }
     }
   }
@@ -55,7 +52,8 @@ class CartController
 
   public function index()
   {
-    $cart = Cart::getUserCartById(Session::get('id'));
+    $id = Session::get('id');
+    $cart = Cart::getUserCartById($id);
     foreach ($cart as $row) {
       $row->product = Product::getProductByCode($row->code_product);
     }
@@ -63,7 +61,7 @@ class CartController
     View::renderTemplate('Cart/cart.html', [
       'title' => 'Shopping Cart',
       'data' => $cart,
-      'total' => Cart::getTotalById(request()->user->id),
+      'total' => Cart::getTotalById($id),
     ]);
   }
 }
