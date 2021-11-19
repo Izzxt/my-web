@@ -10,11 +10,6 @@ use Core\View;
 
 class ShippingController
 {
-  public function order()
-  {
-    # code...
-  }
-
   public function details($orderNumber)
   {
     $data = Order::getDataByOrderNumber($orderNumber);
@@ -27,7 +22,8 @@ class ShippingController
 
   public function index()
   {
-    $cart = Cart::getUserCartById(Session::get('id'));
+    $id = Session::get('id');
+    $cart = Cart::getUserCartById($id);
     foreach ($cart as $row) {
       $row->product = Product::getProductByCode($row->code_product);
     }
@@ -35,7 +31,7 @@ class ShippingController
     View::renderTemplate('Cart/shipping.html', [
       'title' => 'Shipping',
       'data' => $cart,
-      'total' => Cart::getTotalById(request()->user->id),
+      'total' => Cart::getTotalById($id),
     ]);
   }
 }

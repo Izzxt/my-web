@@ -18,4 +18,22 @@ class Order
   {
     return DB::table('order_details')->select($data ?? static::$data)->setFetchMode(PDO::FETCH_CLASS, get_called_class())->where('order_number', $orderNumber)->get();
   }
+
+  public static function insertOrder($id, $code, $orderNumber, $qty, $totalPrice, $shippingAddress)
+  {
+    $data = array(
+      'customer_id' => $id,
+      'order_number' => $orderNumber,
+      'code_product' => $code,
+      'shipping_address' => $shippingAddress,
+      'quantity' => $qty,
+      'total_price' => $totalPrice,
+      'timestamp' => time()
+    );
+
+    $id = DB::table('order_details')->setFetchMode(PDO::FETCH_CLASS, get_called_class())->insert($data);
+
+    return $id;
+  }
+
 }

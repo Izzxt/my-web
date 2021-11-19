@@ -24,13 +24,12 @@ class Routes extends Router
                     Router::post('/cart/add', 'Cart\CartController@add');
                     Router::post('/cart/edit/{id}', 'Cart\CartController@edit');
                     Router::post('/cart/delete/{id}', 'Cart\CartController@delete');
-                    Router::post('/cart/order', 'Cart\ShippingController@order');
+                    Router::post('/cart/order', 'Cart\OrderController@order');
                 }
             });
 
             Router::group(['middleware' => NotLoggedInMiddleware::class], function () {
                 Router::get('/order/{ordernumber}', 'Cart\OrderController@details');
-                // Router::get('/order', 'Cart\OrderController@details');
                 Router::get('/shipping', 'Cart\ShippingController@index');
                 Router::get('/cart', 'Cart\CartController@index');
                 Router::get('/auth', 'Home\home@test');
