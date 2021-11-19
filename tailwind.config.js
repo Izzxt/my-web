@@ -7,6 +7,7 @@ module.exports = {
     extend: {
       fontFamily: {
         sans: ["Arvo", "serif"],
+        poppins: ["Poppins", "sans-serif"],
       },
       colors: {
         darkblue: "#05386B",
