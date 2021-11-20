@@ -3,6 +3,7 @@
 namespace Core;
 
 use App\Handler\ExceptionHandler;
+use App\Middleware\AdminMiddleware;
 use App\Middleware\AuthMiddleware;
 use App\Middleware\LoggedInMiddleware;
 use App\Middleware\NotLoggedInMiddleware;
@@ -15,6 +16,10 @@ class Routes extends Router
         Router::setDefaultNamespace('\App\Controllers');
 
         Router::group(['middleware' => AuthMiddleware::class], function () {
+
+            Router::group(['middleware' => AdminMiddleware::class], function () {
+                Router::get('/admin', 'Admin\Home@index');
+            });
 
             Router::group(['middleware' => LoggedInMiddleware::class, 'exceptionHandler' => ExceptionHandler::class], function () {
                 Router::get('/', 'Home\home@index');

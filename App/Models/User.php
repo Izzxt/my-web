@@ -84,4 +84,9 @@ class User
 
         return DB::table('customer')->where('id', $id)->update($data);
     }
+
+    public static function hasRole($id, $role)
+    {
+        return DB::table('customer')->select($data ?? static::$data)->where('id', $id)->where('role_id', $role)->count();
+    }
 }
