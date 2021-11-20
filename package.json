@@ -6,7 +6,8 @@
     "scripts": {
         "build:css": "tailwindcss -i ./src/style.css -o ./public/assets/style.css",
         "build:watch": "tailwindcss -i ./src/style.css -o ./public/assets/style.css --watch",
-        "start:dev": "php -S localhost:8000 -t ./public"
+        "start:dev": "php -S localhost:8000 -t ./public",
+        "phinx": "php vendor/bin/phinx"
     },
     "devDependencies": {
         "tailwindcss": "^2.2.19"
