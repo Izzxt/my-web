@@ -22,6 +22,8 @@ this.init = function () {
   $(document).ready(() => {
     this.toggleModal("login");
     this.toggleModal("register");
+    this.toggleModal("email");
+    this.toggleModal("phone");
 
     var id = $("input").filter("#item-id");
     id.each((v, e) => {

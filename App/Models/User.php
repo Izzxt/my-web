@@ -48,4 +48,40 @@ class User
 
         return $id;
     }
+
+    public static function updateUserName($id, $name)
+    {
+        $data = array(
+            'name' => $name
+        );
+
+        return DB::table('customer')->where('id', $id)->update($data);
+    }
+
+    public static function updateEmail($id, $email)
+    {
+        $data = array(
+            'email' => $email
+        );
+
+        return DB::table('customer')->where('id', $id)->update($data);
+    }
+
+    public static function updatePhone($id, $phone)
+    {
+        $data = array(
+            'phone_number' => $phone
+        );
+
+        return DB::table('customer')->where('id', $id)->update($data);
+    }
+
+    public static function updatePassword($id, $pass)
+    {
+        $data = array(
+            'password' => $pass
+        );
+
+        return DB::table('customer')->where('id', $id)->update($data);
+    }
 }

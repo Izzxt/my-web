@@ -6,7 +6,7 @@
 			<div>
 				<!-- Dropdown toggle button -->
 				<div class="flex items-center p-2 rounded-md">
-					<p class="mr-4 border-b-2 w-full pb-2">My Profile
+					<p class="mr-4 border-b-2 w-full pb-2"><i class="fa fa-user" aria-hidden="true"></i> My Profile
 					</p>
 				</div>
 				<!-- Dropdown list -->
@@ -17,7 +17,7 @@
 					<a href="#" class="block px-4 text-sm text-gray-400 hover:text-gray-500">
 						Addresses
 					</a>
-					<a href="#" class="block px-4 text-sm text-gray-400 hover:text-gray-500">
+					<a href="profile/user/password" class="block px-4 text-sm text-gray-400 hover:text-gray-500">
 						Change Password
 					</a>
 				</div>
@@ -30,31 +30,97 @@
 				</div>
 			</div>
 		</div>
-		<div class="w-10/12 shadow bg-gray-50">
-			<div class="shadow w-6/12 p-5 bg-gray-50">
-				<div class="border-b-2 border-fuchsia-600">My Profile
-					<p class="text-xs mb-2">Manage and protect your account</p>
-				</div>
+		<div class="w-10/12 shadow bg-gray-50 p-3">
+			<div class="border-b-2 border-fuchsia-600 w-full">My Profile
+				<p class="text-xs mb-2">Manage and protect your account</p>
+			</div>
+			<div class="w-6/12 p-5 bg-gray-50">
 				<div class="profile m-3 p-3">
-					<form action="/register" method="post">
-						<div class="mb-10">
-							<input value="{{ data.nama }}" id="username" type="text" placeholder="Username" name="username" class="user register-form flex-1 w-full py-2 h-14 border-b-2 border-gray-400 focus:border-cg-1 text-gray-600 placeholder-gray-400 outline-none" required/>
+					<form action="/profile/user/name/{{ data.id }}" method="post">
+						<div class="mb-6 flex items-center">
+							<p class="text-gray-500 mr-3">
+								Username:</p>
+							{{ data.username }}
 						</div>
-						<div class="flex justify-between mb-6">
-							<input id="first_name" type="text" placeholder="First name" name="first_name" class="register-form w-52 py-2 h-14 border-b-2 border-gray-400 focus:border-cg-1 text-gray-600 placeholder-gray-400 outline-none" required/>
-							<input id="last_name" type="text" placeholder="Last name" name="last_name" class="register-form w-52 py-2 h-14 border-b-2 border-gray-400 focus:border-cg-1 text-gray-600 placeholder-gray-400 outline-none" required/>
+						<div class="flex justify-between mb-6 items-center">
+							<p class="text-gray-500 mr-3">
+								Name:</p>
+							<input value="{{ data.name }}" id="name" type="text" name="name" class="email-form w-full py-2 h-14 border-b-2 border-gray-400 focus:border-cg-1 text-gray-600 placeholder-gray-400 outline-none" required/>
+							<?xml version="1.0" encoding="utf-8"?>
+
 						</div>
-						<div class="mb-6">
-							<input type="email" placeholder="Email" name="email" class="register-form flex-1 w-full py-2 h-14 border-b-2 border-gray-400 focus:border-cg-1 text-gray-600 placeholder-gray-400 outline-none" required/>
+						<div class="flex mb-6 items-center">
+							<p class="text-gray-500 mr-3">
+								Email:
+							</p>
+							<p class="mr-1">{{ email }}
+								<i class="fas fa-edit ml-3 email-open"></i>
+							</p>
 						</div>
-						<div class="mb-10">
-							<input id="password" type="password" placeholder="Password" name="password" class="register-form flex-1 w-full py-2 h-14 border-b-2 border-gray-400 focus:border-cg-1 text-gray-600 placeholder-gray-400 outline-none" required/>
+						<div class="flex mb-6 items-center">
+							<p class="text-gray-500 mr-3">
+								Phone Number:
+							</p>
+							<p class="mr-1">{{ phone }}
+								<i class="fas fa-edit ml-3 phone-open"></i>
+							</p>
 						</div>
-						<div class="mb-10">
-							<input id="confirm-password" type="password" placeholder="Confirm Password" name="confirm_password" class="register-form flex-1 w-full py-2 h-14 border-b-2 border-gray-400 focus:border-cg-1 text-gray-600 placeholder-gray-400 outline-none" required/>
-						</div>
-						<button type="submit" class="bg-gray-700 hover:bg-lime cursor-pointer text-white w-full font-normal py-4 px-4 focus:outline-none focus:shadow-outline prevent-default transition duration-300"></button>
+						<button class="bg-gray-700 hover:bg-lime cursor-pointer text-white w-full font-normal py-4 px-4 focus:outline-none focus:shadow-outline prevent-default transition duration-300">Save Changes</button>
 					</form>
+					<div class="email-modal opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center transition-all ease-in-out duration-300">
+						<div class="email-overlay absolute w-full h-full bg-gray-900 opacity-50"></div>
+
+						<div class="modal-container bg-white w-11/12 md:max-w-xl mx-auto p-2 shadow-lg z-50 overflow-y-auto">
+							<div class="flex justify-end items-center pb-3">
+								<div class="email-close cursor-pointer z-50">
+									<svg class="fill-current text-black" xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewbox="0 0 18 18">
+										<path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"></path>
+									</svg>
+								</div>
+							</div>
+							<div class="modal-content py-4 text-left px-16">
+								<p class="text-2xl font-bold text-center mb-10">Change Email</p>
+								<form action="/profile/user/email/{{ data.id }}" method="post">
+									<div class="mb-10">
+										<input id="email" type="email" placeholder="Current Email" name="email" class="email-form flex-1 w-full py-2 h-14 border-b-2 border-gray-400 focus:border-cg-1 text-gray-600 placeholder-gray-400 outline-none" required/>
+									</div>
+									<div class="mb-10">
+										<input id="confirm-email" type="email" placeholder="New Email" name="new_email" class="email-form flex-1 w-full py-2 h-14 border-b-2 border-gray-400 focus:border-cg-1 text-gray-600 placeholder-gray-400 outline-none" required/>
+									</div>
+									<button type="submit" class="bg-gray-700 hover:bg-lime cursor-pointer text-white w-full font-normal py-4 px-4 focus:outline-none focus:shadow-outline prevent-default transition duration-300">
+										Save Changes
+									</button>
+								</form>
+							</div>
+						</div>
+					</div>
+					<div class="phone-modal opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center transition-all ease-in-out duration-300">
+						<div class="phone-overlay absolute w-full h-full bg-gray-900 opacity-50"></div>
+
+						<div class="modal-container bg-white w-11/12 md:max-w-xl mx-auto p-2 shadow-lg z-50 overflow-y-auto">
+							<div class="flex justify-end items-center pb-3">
+								<div class="phone-close cursor-pointer z-50">
+									<svg class="fill-current text-black" xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewbox="0 0 18 18">
+										<path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"></path>
+									</svg>
+								</div>
+							</div>
+							<div class="modal-content py-4 text-left px-16">
+								<p class="text-2xl font-bold text-center mb-10">Change Phone</p>
+								<form action="/profile/user/phone/{{ data.id }}" method="post">
+									<div class="mb-10">
+										<input id="phone" type="phone" placeholder="Current Phone" name="phone" class="phone-form flex-1 w-full py-2 h-14 border-b-2 border-gray-400 focus:border-cg-1 text-gray-600 placeholder-gray-400 outline-none" required/>
+									</div>
+									<div class="mb-10">
+										<input id="confirm-phone" type="phone" placeholder="New Phone" name="new_phone" class="phone-form flex-1 w-full py-2 h-14 border-b-2 border-gray-400 focus:border-cg-1 text-gray-600 placeholder-gray-400 outline-none" required/>
+									</div>
+									<button type="submit" class="bg-gray-700 hover:bg-lime cursor-pointer text-white w-full font-normal py-4 px-4 focus:outline-none focus:shadow-outline prevent-default transition duration-300">
+										Save Changes
+									</button>
+								</form>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
