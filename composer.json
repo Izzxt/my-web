@@ -6,7 +6,8 @@
         "symfony/dotenv": "^5.2",
         "twig/twig": "^3.0",
         "twbs/bootstrap": "5.0.0-beta2",
-        "rakit/validation": "^1.4"
+        "rakit/validation": "^1.4",
+        "robmorgan/phinx": "^0.12.9"
     },
     "autoload": {
         "psr-4": {

@@ -58,10 +58,12 @@ class CartController
       $row->product = Product::getProductByCode($row->code_product);
     }
 
+    $total = Cart::getTotalById($id);
+
     View::renderTemplate('Cart/cart.html', [
       'title' => 'Shopping Cart',
       'data' => $cart,
-      'total' => Cart::getTotalById($id),
+      'total' => $total,
     ]);
   }
 }

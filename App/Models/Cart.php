@@ -22,7 +22,7 @@ class Cart
 
   public static function getTotalById($id)
   {
-    return DB::table('customer_cart')->select(DB::raw('SUM(total_price) AS total'))->where('customer_id', $id)->get();
+    return DB::table('customer_cart')->select(DB::raw('sum(total_price) AS tot'))->where('customer_id', $id)->get();
   }
 
   public static function getRowCountByUserId($id)
