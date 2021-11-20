@@ -25,6 +25,10 @@ class Routes extends Router
                     Router::post('/cart/edit/{id}', 'Cart\CartController@edit');
                     Router::post('/cart/delete/{id}', 'Cart\CartController@delete');
                     Router::post('/cart/order', 'Cart\OrderController@order');
+                    Router::post('/profile/user/name/{id}', 'User\ProfileController@updatename');
+                    Router::post('/profile/user/email/{id}', 'User\ProfileController@updateemail');
+                    Router::post('/profile/user/phone/{id}', 'User\ProfileController@updatephone');
+                    Router::post('/profile/user/password/{id}', 'User\ProfileController@updatepassword');
                 }
             });
 
@@ -35,6 +39,7 @@ class Routes extends Router
                 Router::get('/auth', 'Home\home@test');
                 Router::get('/logout', 'Auth\Login@logout');
                 Router::get('/profile', 'User\ProfileController@index');
+                Router::get('/profile/user/password', 'User\ProfileController@indexPassword');
             });
 
             Router::partialGroup('{dir}/{controller}/{action}', function ($dir, $controller, $action) {
