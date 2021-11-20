@@ -1,17 +1,25 @@
 {
-    "name": "my-web",
-    "version": "1.0.0",
-    "main": "index.js",
-    "license": "MIT",
-    "scripts": {
-        "build:css": "tailwindcss -i ./src/style.css -o ./public/assets/style.css",
-        "build:watch": "tailwindcss -i ./src/style.css -o ./public/assets/style.css --watch",
-        "start:dev": "php -S localhost:8000 -t ./public",
-        "phinx": "php vendor/bin/phinx",
-        "migrate:i": "yarn phinx migrate -e development",
-        "migrate:n": "yarn phinx migrate -e development_n"
-    },
-    "devDependencies": {
-        "tailwindcss": "^2.2.19"
-    }
+  "name": "my-web",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "build:css": "tailwindcss -i ./src/style.css -o ./public/assets/style.css",
+    "build:admin": "tailwindcss -i ./src/admin.css -c ./src/tailwind.config.js -o ./public/assets/admin/css/style.css",
+    "build:watch": "tailwindcss -i ./src/style.css -o ./public/assets/style.css --watch",
+    "start:dev": "php -S localhost:8000 -t ./public",
+    "phinx": "php vendor/bin/phinx",
+    "migrate:i": "yarn phinx migrate -e development",
+    "migrate:n": "yarn phinx migrate -e development_n"
+  },
+  "devDependencies": {
+    "tailwindcss": "^2.2.19"
+  },
+  "dependencies": {
+    "@tailwindcss/custom-forms": "^0.2.1",
+    "autoprefixer": "^10.4.0",
+    "color": "^4.0.1",
+    "postcss-cli": "^9.0.2",
+    "tailwindcss-multi-theme": "^1.0.4"
+  }
 }
