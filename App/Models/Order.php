@@ -36,4 +36,14 @@ class Order
     return $id;
   }
 
+  public static function getRevenue()
+  {
+    return DB::table('order_details')->select(DB::raw('SUM(total_price) as revenue'))->where('payment_status', '=', 'paid')->get();
+  }
+
+  public static function getTotalSales()
+  {
+    return DB::table('order_details')->where('payment_status', '=', 'paid')->count();
+  }
+
 }

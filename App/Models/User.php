@@ -89,4 +89,9 @@ class User
     {
         return DB::table('customer')->select($data ?? static::$data)->where('id', $id)->where('role_id', $role)->count();
     }
+
+    public static function getUserTotal()
+    {
+        return DB::table('customer')->count();
+    }
 }
