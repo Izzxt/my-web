@@ -7,25 +7,39 @@ use App\Models\Order;
 use App\Models\Product;
 use Core\Utils;
 use Core\View;
+use stdClass;
 
 class OrderController
 {
+  public function __construct()
+  {
+    $this->data = new stdClass();
+  }
+
   public function order()
   {
     $id = request()->user->id;
     $data = Cart::getUserCartById($id);
     $orderNumber = Utils::generateRandomString(6);
+    $array = [];
 
     foreach ($data as $value) {
-      $_code[] = $value->code_product;
-      $_qty[] = $value->quantity;
       $totalPrice = Cart::getTotalById($id);
+
+      array_push(
+        $array,
+        [
+          'customer_id' => $value->customer_id,
+          'code' => $value->code_product,
+          'quantity' => $value->quantity,
+          'price' => $value->total_price
+        ]
+      );
+
+      $cart = json_encode($array);
     }
 
-    $qty = implode(',', $_qty);
-    $code = implode(',', $_code);
-
-    if (Order::insertOrder($id, $code, $orderNumber, $qty, $totalPrice[0]->tot, '')) {
+    if (Order::insertOrder($id,  $orderNumber, $totalPrice[0]->tot, '', $cart)) {
       Cart::deleteUserCartById($id);
       redirect('/order/' . $orderNumber);
     }
