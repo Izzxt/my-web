@@ -7,6 +7,7 @@ use App\Middleware\AdminMiddleware;
 use App\Middleware\AuthMiddleware;
 use App\Middleware\LoggedInMiddleware;
 use App\Middleware\NotLoggedInMiddleware;
+use Pecee\SimpleRouter\Route\Route;
 use Pecee\SimpleRouter\SimpleRouter as Router;
 
 class Routes extends Router
@@ -19,6 +20,12 @@ class Routes extends Router
 
             Router::group(['middleware' => AdminMiddleware::class], function () {
                 Router::get('/admin', 'Admin\Home@index');
+                Router::get('/admin/customer/profile', 'Admin\Customer\ProfileController@index');
+
+                if (request()->getMethod() == "post") {
+                    Router::post('/admin/customer/profile/delete/{id}', 'Admin\Customer\ProfileController@delete');
+                    Router::post('/admin/customer/profile/edit/{id}', 'Admin\Customer\ProfileController@update');
+                }
             });
 
             Router::group(['middleware' => LoggedInMiddleware::class, 'exceptionHandler' => ExceptionHandler::class], function () {
