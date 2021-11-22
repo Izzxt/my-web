@@ -9,16 +9,16 @@ use PDO;
 class User
 {
 
-    private static $data = array('id', 'username', 'name', 'email', 'phone_number', 'password', 'address', 'state', 'create_date', 'update_date');
+    private static $data = array('id', 'username', 'name', 'email', 'phone_number', 'password', 'address', 'state', 'create_date', 'update_date', 'role_id', 'profile_img');
 
     public static function getDataByUsername($username, $data = null)
     {
         return DB::table('customer')->select($data ?? static::$data)->setFetchMode(PDO::FETCH_CLASS, get_called_class())->where('username', $username)->first();
     }
 
-    public static function getDataById($id, $data = null)
+    public static function getDataById($id, $limit = 10, $data = null)
     {
-        return DB::table('customer')->select($data ?? static::$data)->setFetchMode(PDO::FETCH_CLASS, get_called_class())->where('id', $id)->first();
+        return DB::table('customer')->select($data ?? static::$data)->setFetchMode(PDO::FETCH_CLASS, get_called_class())->where('id', $id)->limit($limit)->first();
     }
 
     public static function getDataByEmail($email, $data = null)
