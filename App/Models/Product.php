@@ -14,8 +14,8 @@ class Product
     return DB::table('product')->select($data ?? static::$data)->limit($limit)->orderBy('id', 'desc')->get();
   }
 
-  public static function getProductByCode($code, $data = null)
+  public static function getProductByCode($code, $limit = 10, $data = null)
   {
-    return DB::table('product')->select($data ?? static::$data)->setFetchMode(PDO::FETCH_CLASS, get_called_class())->where('code_product', $code)->get();
+    return DB::table('product')->select($data ?? static::$data)->setFetchMode(PDO::FETCH_CLASS, get_called_class())->where('code_product', $code)->limit($limit)->get();
   }
 }
