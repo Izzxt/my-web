@@ -94,4 +94,27 @@ class User
     {
         return DB::table('customer')->count();
     }
+
+    public static function getAllUsers($limit = 10, $data = null)
+    {
+        return DB::table('customer')->select($data ?? static::$data)->where('role_id', '=', 1)->limit($limit)->orderBy('id', 'desc')->get();
+    }
+
+    public static function deleteUserById($id)
+    {
+        return DB::table('customer')->where('id', $id)->delete();
+    }
+    
+    public static function updateUser($id, $name, $email, $phone)
+    {
+        $data = array(
+            'name' => $name,
+            'email' => $email,
+            'phone_number' => $phone
+        );
+
+        $id = DB::table('customer')->where('id', $id)->update($data);
+
+        return $id;
+    }
 }
