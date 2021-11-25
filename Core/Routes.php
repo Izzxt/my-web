@@ -52,6 +52,7 @@ class Routes extends Router
                 Router::get('/logout', 'Auth\Login@logout');
                 Router::get('/profile', 'User\ProfileController@index');
                 Router::get('/profile/user/password', 'User\ProfileController@indexPassword');
+                Router::get('/profile/purchases', 'User\ProfileController@purchases');
             });
 
             Router::partialGroup('{dir}/{controller}/{action}', function ($dir, $controller, $action) {

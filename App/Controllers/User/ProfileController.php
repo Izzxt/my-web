@@ -77,6 +77,13 @@ class ProfileController
     ]);
   }
 
+  public function purchases()
+  {
+    View::renderTemplate('User/orderhistory.html', [
+      'title' => 'My Purchase'
+    ]);
+  }
+
   public function indexPassword()
   {
     View::renderTemplate('User/password.html', [

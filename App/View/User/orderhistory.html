@@ -1,0 +1,24 @@
+{% extends "base.html" %} {% block body %}
+<div class="flex flex-col items-center justify-center mt-24 py-10 bg-gray-200 shadow-inner">
+  <div class="font-mono">{{ title }}</div>
+  <div class="text-sm font-mono">Home / {{ title }}</div>
+</div>
+<div class="container w-11/12 md:max-w-6xl mx-auto my-10">
+  <div class="bg-gray-200 w-full shadow-md">
+    <div>
+      <div class="flex">
+        <div class="flex-row">
+          <div>Order Date</div>
+          <div>11 September 2021</div>
+        </div>
+        <div>
+          <div class="flex-row">
+            <div>Order Number</div>
+            <div>#SDF78ASD7FF893</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
