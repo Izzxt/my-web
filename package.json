@@ -7,7 +7,7 @@
     "build:css": "tailwindcss -i ./src/style.css -o ./public/assets/style.css",
     "build:admin": "tailwindcss -i ./src/admin.css -c ./src/tailwind.config.js -o ./public/assets/admin/css/style.css",
     "build:watch": "tailwindcss -i ./src/style.css -o ./public/assets/style.css --watch",
-    "start:dev": "php -S localhost:8000 -t ./public",
+    "start:dev": "php -S localhost:8000 -t ./public & yarn start:watch",
     "start:watch": "yarn browser-sync start --proxy 'http://localhost:8000' --files '**/**/**/*' --config ./src/BrowserSync.js", 
     "phinx": "php vendor/bin/phinx",
     "migrate:i": "yarn phinx migrate -e development",
