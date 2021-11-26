@@ -55,7 +55,7 @@
                   aria-label="submenu"
                 >
                   <li class="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200">
-                    <a class="w-full" href="admin/customer/profile"> Customer Profile </a>
+                    <a class="w-full" href="admin/customer/account"> Customer Profile </a>
                   </li>
                   <li class="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200">
                     <a class="w-full" href="pages/create-account.html"> Customer Details </a>
@@ -322,7 +322,7 @@
               <!-- Profile menu -->
               <li class="relative">
                 <button class="align-middle rounded-full focus:shadow-outline-green focus:outline-none" @click="toggleProfileMenu" @keydown.escape="closeProfileMenu" aria-label="Account" aria-haspopup="true">
-                  <img class="object-cover w-8 h-8 rounded-full" src="./assets/images/profile/{{ user.profile_img }}" alt="" aria-hidden="true" />
+                  <img class="object-cover w-8 h-8 rounded-full" src="./assets/images/account/{{ user.profile_img }}" alt="" aria-hidden="true" />
                 </button>
                 <template x-if="isProfileMenuOpen">
                   <ul

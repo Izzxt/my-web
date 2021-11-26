@@ -24,7 +24,7 @@ class ProfileController
         $phone = input('phone_number');
 
         if( User::updateUser($id, $name, $email, $phone)) {
-            return redirect('/admin/customer/profile');
+            return redirect('/admin/customer/account');
         }
 
     }
@@ -32,7 +32,7 @@ class ProfileController
     public function delete($id)
     {
         if (User::deleteUserById($id)) {
-            return redirect('/admin/customer/profile');
+            return redirect('/admin/customer/account');
         }
     }
 }

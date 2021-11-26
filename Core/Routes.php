@@ -20,11 +20,11 @@ class Routes extends Router
 
             Router::group(['middleware' => AdminMiddleware::class], function () {
                 Router::get('/admin', 'Admin\Home@index');
-                Router::get('/admin/customer/profile', 'Admin\Customer\ProfileController@index');
+                Router::get('/admin/customer/account', 'Admin\Customer\ProfileController@index');
 
                 if (request()->getMethod() == "post") {
-                    Router::post('/admin/customer/profile/delete/{id}', 'Admin\Customer\ProfileController@delete');
-                    Router::post('/admin/customer/profile/edit/{id}', 'Admin\Customer\ProfileController@update');
+                    Router::post('/admin/customer/account/delete/{id}', 'Admin\Customer\ProfileController@delete');
+                    Router::post('/admin/customer/account/edit/{id}', 'Admin\Customer\ProfileController@update');
                 }
             });
 
@@ -37,10 +37,10 @@ class Routes extends Router
                     Router::post('/cart/edit/{id}', 'Cart\CartController@edit');
                     Router::post('/cart/delete/{id}', 'Cart\CartController@delete');
                     Router::post('/cart/order', 'Cart\OrderController@order');
-                    Router::post('/profile/user/name/{id}', 'User\ProfileController@updatename');
-                    Router::post('/profile/user/email/{id}', 'User\ProfileController@updateemail');
-                    Router::post('/profile/user/phone/{id}', 'User\ProfileController@updatephone');
-                    Router::post('/profile/user/password/{id}', 'User\ProfileController@updatepassword');
+                    Router::post('/account/user/name/{id}', 'User\ProfileController@updatename');
+                    Router::post('/account/user/email/{id}', 'User\ProfileController@updateemail');
+                    Router::post('/account/user/phone/{id}', 'User\ProfileController@updatephone');
+                    Router::post('/account/user/password/{id}', 'User\ProfileController@updatepassword');
                 }
             });
 
@@ -50,9 +50,9 @@ class Routes extends Router
                 Router::get('/cart', 'Cart\CartController@index');
                 Router::get('/auth', 'Home\home@test');
                 Router::get('/logout', 'Auth\Login@logout');
-                Router::get('/profile', 'User\ProfileController@index');
-                Router::get('/profile/user/password', 'User\ProfileController@indexPassword');
-                Router::get('/profile/purchases', 'User\ProfileController@purchases');
+                Router::get('/account', 'User\ProfileController@index');
+                Router::get('/account/user/password', 'User\ProfileController@indexPassword');
+                Router::get('/account/purchases', 'User\ProfileController@purchases');
             });
 
             Router::partialGroup('{dir}/{controller}/{action}', function ($dir, $controller, $action) {

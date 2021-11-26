@@ -14,7 +14,7 @@ class ProfileController
     $name = input('name');
 
     if (User::updateUserName($id, $name)) {
-      return redirect('/profile');
+      return redirect('/account');
     }
   }
 
@@ -25,7 +25,7 @@ class ProfileController
     $newEmail = input('new_email');
 
     if ($user->email == $email) {
-      if (User::updateEmail($id, $newEmail)) return redirect('/profile');
+      if (User::updateEmail($id, $newEmail)) return redirect('/account');
     } else {
       response()->json(['message' => 'provided current email is incorrect']);
     }
@@ -38,7 +38,7 @@ class ProfileController
     $newPhone = input('new_phone');
 
     if ($user->phone_number == $phone) {
-      if (User::updatePhone($id, $newPhone)) return redirect('/profile');
+      if (User::updatePhone($id, $newPhone)) return redirect('/account');
     } else {
       response()->json(['message' => 'provided current phone is incorrect']);
     }
@@ -58,7 +58,7 @@ class ProfileController
     }
 
     if ($verifyPassword == $curPassword) {
-      if (User::updatePassword($id, $hashedPassword)) return redirect('/profile/user/password');
+      if (User::updatePassword($id, $hashedPassword)) return redirect('/account/user/password');
     } else {
       response()->json(['message' => 'provided current password is incorrect']);
     }

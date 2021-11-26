@@ -33,7 +33,7 @@
           </td>
           <td class="px-4 py-3 text-sm">{{ customer.email }}</td>
           <td class="px-4 py-3 text-sm">+(60) {{ customer.phone_number | trim('0') }}</td>
-          <form class="flex items-center delete-data" method="post" action="/admin/customer/profile/delete/{{ customer.id }}">
+          <form class="flex items-center delete-data" method="post" action="/admin/customer/account/delete/{{ customer.id }}">
             <td class="select-none">
               <span @click="openModal" class="px-3 py-1.5 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-blue-600 border border-transparent rounded-md active:bg-purple-600 hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue cursor-pointer select-none">Edit</span>
               <button class="px-3 py-1 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-red-600 border border-transparent rounded-md active:bg-purple-600 hover:bg-red-700 focus:outline-none focus:shadow-outline-red select-none">Delete</button>
@@ -76,7 +76,7 @@
               <div class="mt-4 mb-6">
                 <!-- Modal title -->
                 <p class="mb-2 text-lg font-semibold text-gray-700 dark:text-gray-300">Edit Data</p>
-                <form class="edit-data" method="post" action="/admin/customer/profile/edit/{{ customer.id }}">
+                <form class="edit-data" method="post" action="/admin/customer/account/edit/{{ customer.id }}">
                 <div class="flex px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800">
                   <label class="flex text-sm items-center">
                     <span class="text-gray-700 dark:text-gray-400">ID:</span>
