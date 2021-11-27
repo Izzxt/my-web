@@ -32,7 +32,7 @@ return
                 'host' => 'localhost',
                 'name' => 'web',
                 'user' => 'root',
-                'pass' => 'admin',
+                'pass' => 'admin123',
                 'port' => '3306',
                 'charset' => 'utf8',
             ],
