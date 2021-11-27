@@ -5,10 +5,11 @@
   "license": "MIT",
   "scripts": {
     "build:css": "tailwindcss -i ./src/style.css -o ./public/assets/style.css",
-    "build:admin": "tailwindcss -i ./src/admin.css -c ./src/tailwind.config.js -o ./public/assets/admin/css/style.css",
+    "build:admin": "tailwindcss -i ./src/admin.css -c ./src/tailwind.config.js -o ./public/assets/admin/css/style.css --watch",
     "build:watch": "tailwindcss -i ./src/style.css -o ./public/assets/style.css --watch",
-    "start:dev": "php -S localhost:8000 -t ./public & yarn start:watch",
-    "start:watch": "yarn browser-sync start --proxy 'http://localhost:8000' --files '**/**/**/*' --config ./src/BrowserSync.js", 
+    "start:dev": "concurrently \"yarn start:php\" \"yarn start:watch\" \"yarn build:admin\" \"yarn build:watch\"",
+    "start:php": "php -S localhost:8000 -t ./public",
+    "start:watch": "yarn browser-sync start --proxy 'http://localhost:8000' --files '**/**/**/*' --config ./src/BrowserSync.js",
     "phinx": "php vendor/bin/phinx",
     "migrate:i": "yarn phinx migrate -e development",
     "migrate:n": "yarn phinx migrate -e development_n"
@@ -21,6 +22,7 @@
     "@tailwindcss/custom-forms": "^0.2.1",
     "autoprefixer": "^10.4.0",
     "color": "^4.0.1",
+    "concurrently": "^6.4.0",
     "postcss-cli": "^9.0.2",
     "tailwindcss-multi-theme": "^1.0.4"
   }
