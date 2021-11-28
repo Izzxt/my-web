@@ -2,6 +2,7 @@
 
 namespace App\Controllers\Admin\Customer;
 
+use App\Models\Order;
 use App\Models\User;
 use Core\View;
 
@@ -33,6 +34,24 @@ class ProfileController
     {
         if (User::deleteUserById($id)) {
             return redirect('/admin/customer/account');
+        }
+    }
+
+    public function incomingorder() {
+
+        $view = input()->post('view');
+
+        if (isset($view)) {
+            if ($view != '') {
+                Order::updateAllUnseenOrders();
+            }
+        }
+        $orderCount = Order::getAllUnseenOrders();
+
+        if ($orderCount > 0) {
+            response()->json([$orderCount]);
+        } else {
+            response()->json([0]);
         }
     }
 }
