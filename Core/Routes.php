@@ -22,9 +22,11 @@ class Routes extends Router
                 Router::get('/admin', 'Admin\Home@index');
                 Router::get('/admin/customer/account', 'Admin\Customer\ProfileController@index');
 
+
                 if (request()->getMethod() == "post") {
                     Router::post('/admin/customer/account/delete/{id}', 'Admin\Customer\ProfileController@delete');
                     Router::post('/admin/customer/account/edit/{id}', 'Admin\Customer\ProfileController@update');
+                    Router::post('/admin/customer/account/incoming/order', 'Admin\Customer\ProfileController@incomingorder');
                 }
             });
 
