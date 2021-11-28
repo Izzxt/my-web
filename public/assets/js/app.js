@@ -33,7 +33,26 @@ class WebInterface {
         }
       });
     });
-  };
+    this.loadUnseenNotifications("");
+  }
+
+  loadUnseenNotifications(view = "") {
+    $.ajax({
+      url: "/admin/customer/account/incoming/order",
+      method: "POST",
+      data: { view: view },
+      dataType: "json",
+      success: function (data) {
+        $(".incoming-order").html(data[0]);
+        $(".incoming-order").addClass("inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-600 bg-red-100 rounded-full dark:text-red-100 dark:bg-red-600");
+        if (data[0] > 0) {
+          $(".noti").addClass("absolute top-0 right-0 inline-block w-3 h-3 transform translate-x-1 -translate-y-1 bg-red-600 border-2 border-white rounded-full dark:border-gray-800");
+          $(".incoming-order").addClass("inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-600 bg-red-100 rounded-full dark:text-red-100 dark:bg-red-600");
+          $(".incoming-order").html(data[0]);
+        }
+      },
+    });
+  }
 
   toggleModal(name) {
     $("." + name + "-open").click(() => {
@@ -65,5 +84,15 @@ function dec(id) {
 }
 
 $(function () {
-  new WebInterface();
+  const web = new WebInterface();
+  setInterval(() => web.loadUnseenNotifications(), 5000);
+
+  $(document).on("click", ".i-o", function () {
+    $(".incoming-order").html("");
+    web.loadUnseenNotifications("yes");
+  });
+
+  $(document).on("click", ".btn-noti", function () {
+    web.loadUnseenNotifications("");
+  });
 });
