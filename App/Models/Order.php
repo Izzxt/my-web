@@ -7,11 +7,24 @@ use PDO;
 
 class Order
 {
-  private static $data = array('id', 'customer_id',  'order_number', 'shipping_address', 'total_price', 'payment_status', 'status', 'timestamp', 'cart');
+  private static $data = array('id', 'customer_id',  'order_number', 'shipping_address', 'total_price', 'payment_status', 'status', 'timestamp', 'cart', 'notif_status');
 
   public static function getAllOrderDetails($limit = 10)
   {
     return DB::table('order_details')->select($data ?? static::$data)->setFetchMode(PDO::FETCH_CLASS, get_called_class())->orderBy('id', 'desc')->limit($limit)->get();
+  }
+
+  public static function getAllUnseenOrders()
+  {
+    return DB::table('order_details')->select($data ?? static::$data)->setFetchMode(PDO::FETCH_CLASS, get_called_class())->where('notif_status', '=', 1)->count();
+  }
+
+  public static function updateAllUnseenOrders()
+  {
+    $data = array(
+      'notif_status' => 0
+    );
+    return DB::table('order_details')->where('notif_status', '=', 1)->update($data);
   }
 
   public static function getDataById($id, $data = null)
