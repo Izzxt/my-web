@@ -68,4 +68,4 @@ const lineConfig = {
 
 // change this to the id of your chart element in HMTL
 const lineCtx = document.getElementById('line')
-window.myLine = new Chart(lineCtx, lineConfig)
+// window.myLine = new Chart(lineCtx, lineConfig)
