@@ -18,32 +18,20 @@ class Routes extends Router
 
         Router::group(['middleware' => AuthMiddleware::class], function () {
 
-            Router::group(['middleware' => AdminMiddleware::class], function () {
-                Router::get('/admin', 'Admin\Home@index');
-                Router::get('/admin/customer/account', 'Admin\Customer\ProfileController@index');
-
-
-                if (request()->getMethod() == "post") {
-                    Router::post('/admin/customer/account/delete/{id}', 'Admin\Customer\ProfileController@delete');
-                    Router::post('/admin/customer/account/edit/{id}', 'Admin\Customer\ProfileController@update');
-                    Router::post('/admin/customer/account/incoming/order', 'Admin\Customer\ProfileController@incomingorder');
-                }
-            });
-
             Router::group(['middleware' => LoggedInMiddleware::class, 'exceptionHandler' => ExceptionHandler::class], function () {
                 Router::get('/', 'Home\home@index');
                 Router::get('/product', 'Product\ProductController@index');
 
-                if (request()->getMethod() == "post") {
-                    Router::post('/cart/add', 'Cart\CartController@add');
-                    Router::post('/cart/edit/{id}', 'Cart\CartController@edit');
-                    Router::post('/cart/delete/{id}', 'Cart\CartController@delete');
-                    Router::post('/cart/order', 'Cart\OrderController@order');
-                    Router::post('/account/user/name/{id}', 'User\ProfileController@updatename');
-                    Router::post('/account/user/email/{id}', 'User\ProfileController@updateemail');
-                    Router::post('/account/user/phone/{id}', 'User\ProfileController@updatephone');
-                    Router::post('/account/user/password/{id}', 'User\ProfileController@updatepassword');
-                }
+                // if (request()->getMethod() == "post") {
+                //     Router::post('/cart/add', 'Cart\CartController@add');
+                //     Router::post('/cart/edit/{id}', 'Cart\CartController@edit');
+                //     Router::post('/cart/delete/{id}', 'Cart\CartController@delete');
+                //     Router::post('/cart/order', 'Cart\OrderController@order');
+                //     Router::post('/account/user/name/{id}', 'User\ProfileController@updatename');
+                //     Router::post('/account/user/email/{id}', 'User\ProfileController@updateemail');
+                //     Router::post('/account/user/phone/{id}', 'User\ProfileController@updatephone');
+                //     Router::post('/account/user/password/{id}', 'User\ProfileController@updatepassword');
+                // }
             });
 
             Router::group(['middleware' => NotLoggedInMiddleware::class], function () {
@@ -55,6 +43,18 @@ class Routes extends Router
                 Router::get('/account', 'User\ProfileController@index');
                 Router::get('/account/user/password', 'User\ProfileController@indexPassword');
                 Router::get('/account/purchases', 'User\ProfileController@purchases');
+
+                Router::group(['middleware' => AdminMiddleware::class], function () {
+                    Router::get('/admin', 'Admin\Home@index');
+                    Router::get('/admin/customer/account', 'Admin\Customer\ProfileController@index');
+
+
+                    if (request()->getMethod() == "post") {
+                        Router::post('/admin/customer/account/delete/{id}', 'Admin\Customer\ProfileController@delete');
+                        Router::post('/admin/customer/account/edit/{id}', 'Admin\Customer\ProfileController@update');
+                        Router::post('/admin/customer/account/incoming/order', 'Admin\Customer\ProfileController@incomingorder');
+                    }
+                });
             });
 
             Router::partialGroup('{dir}/{controller}/{action}', function ($dir, $controller, $action) {
@@ -66,6 +66,14 @@ class Routes extends Router
             if (request()->getMethod() == "post") {
                 Router::post('/login', 'Auth\Login@request');
                 Router::post('/register', 'Auth\Register@request');
+                Router::post('/cart/add', 'Cart\CartController@add');
+                Router::post('/cart/edit/{id}', 'Cart\CartController@edit');
+                Router::post('/cart/delete/{id}', 'Cart\CartController@delete');
+                Router::post('/cart/order', 'Cart\OrderController@order');
+                Router::post('/account/user/name/{id}', 'User\ProfileController@updatename');
+                Router::post('/account/user/email/{id}', 'User\ProfileController@updateemail');
+                Router::post('/account/user/phone/{id}', 'User\ProfileController@updatephone');
+                Router::post('/account/user/password/{id}', 'User\ProfileController@updatepassword');
             }
         });
 
