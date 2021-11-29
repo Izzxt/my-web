@@ -27,7 +27,7 @@ class Login
    protected function login(User $user)
    {
        if ($user && Auth::login($user)) {
-         //  response()->json(["status" => "success", "location" => "/"]);
+          response()->json(["status" => "success", "location" => "/"]);
           redirect('/');
        } else {
           return response()->json(["status" => "error", "location" => "invalid password"]);

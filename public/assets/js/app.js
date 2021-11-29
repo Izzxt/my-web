@@ -33,25 +33,6 @@ class WebInterface {
         }
       });
     });
-    this.loadUnseenNotifications("");
-  }
-
-  loadUnseenNotifications(view = "") {
-    $.ajax({
-      url: "/admin/customer/account/incoming/order",
-      method: "POST",
-      data: { view: view },
-      dataType: "json",
-      success: function (data) {
-        $(".incoming-order").html(data[0]);
-        $(".incoming-order").addClass("inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-600 bg-red-100 rounded-full dark:text-red-100 dark:bg-red-600");
-        if (data[0] > 0) {
-          $(".noti").addClass("absolute top-0 right-0 inline-block w-3 h-3 transform translate-x-1 -translate-y-1 bg-red-600 border-2 border-white rounded-full dark:border-gray-800");
-          $(".incoming-order").addClass("inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-600 bg-red-100 rounded-full dark:text-red-100 dark:bg-red-600");
-          $(".incoming-order").html(data[0]);
-        }
-      },
-    });
   }
 
   toggleModal(name) {
@@ -65,6 +46,66 @@ class WebInterface {
 
     $("." + name + "-overlay").click(() => {
       $("." + name + "-modal").toggleClass("opacity-0 pointer-events-none transition-all ease-in-out duration-500");
+    });
+  }
+}
+
+class LoginManager {
+  constructor() {
+    $(document).on("click", ".btn-login", (e) => {
+      e.preventDefault();
+
+      const email = $("#email").val();
+      const password = $("#password").val();
+
+      $.ajax({
+        url: "/login",
+        method: "POST",
+        dataType: "json",
+        data: { email: email, password: password },
+        success: function (data) {
+          if (data.status === 'success') {
+            location.replace(data.location);
+          } else {
+            alert(data.message);
+          }
+        },
+      });
+    });
+  }
+}
+
+class NotificationManager {
+  constructor() {
+    $(document).ready(() => {
+      NotificationManager.loadUnseenNotifications("");
+    });
+
+    $(document).on("click", ".i-o", function () {
+      $(".incoming-order").html("");
+      NotificationManager.loadUnseenNotifications("yes");
+    });
+
+    $(document).on("click", ".btn-noti", function () {
+      NotificationManager.loadUnseenNotifications("");
+    });
+  }
+
+  static loadUnseenNotifications(view = "") {
+    $.ajax({
+      url: "/admin/customer/account/incoming/order",
+      method: "POST",
+      data: { view: view },
+      dataType: "json",
+      success: function (data) {
+        if (data.order_count > 0) {
+          $(".noti").addClass("absolute top-0 right-0 inline-block w-3 h-3 transform translate-x-1 -translate-y-1 bg-red-600 border-2 border-white rounded-full dark:border-gray-800");
+          $(".incoming-order").addClass("inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-600 bg-red-100 rounded-full dark:text-red-100 dark:bg-red-600");
+        } else {
+          $(".incoming-order").html(data.order_count);
+          $(".incoming-order").addClass("inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-600 bg-red-100 rounded-full dark:text-red-100 dark:bg-red-600");
+        }
+      },
     });
   }
 }
@@ -84,15 +125,8 @@ function dec(id) {
 }
 
 $(function () {
-  const web = new WebInterface();
-  setInterval(() => web.loadUnseenNotifications(), 5000);
-
-  $(document).on("click", ".i-o", function () {
-    $(".incoming-order").html("");
-    web.loadUnseenNotifications("yes");
-  });
-
-  $(document).on("click", ".btn-noti", function () {
-    web.loadUnseenNotifications("");
-  });
+  new LoginManager();
+  new WebInterface();
+  new NotificationManager();
+  setInterval(() => NotificationManager.loadUnseenNotifications(), 5000);
 });
