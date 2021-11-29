@@ -57,7 +57,7 @@
                   aria-label="submenu"
                 >
                   <li class="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200">
-                    <a class="w-full" href="admin/customer/account"> Customer Profile </a>
+                    <a class="w-full" href="/admin/customer/account"> Customer Profile </a>
                   </li>
                   <li class="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200">
                     <a class="w-full" href="pages/create-account.html"> Customer Details </a>
@@ -294,6 +294,7 @@
                 </button>
                 <template x-if="isNotificationsMenuOpen">
                   <ul
+                    @click="openModal"
                     x-transition:leave="transition ease-in duration-150"
                     x-transition:leave-start="opacity-100"
                     x-transition:leave-end="opacity-0"
