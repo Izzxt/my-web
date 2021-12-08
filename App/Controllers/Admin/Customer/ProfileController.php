@@ -49,9 +49,13 @@ class ProfileController
         $orderCount = Order::getAllUnseenOrders();
 
         if ($orderCount > 0) {
-            response()->json([$orderCount]);
+            response()->json([
+                'order_count' => $orderCount
+            ]);
         } else {
-            response()->json([0]);
+            response()->json([
+                'order_count' => 0
+            ]);
         }
     }
 }
