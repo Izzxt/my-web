@@ -4,17 +4,51 @@
   <div class="text-sm font-mono">Home / {{ title }}</div>
 </div>
 <div class="container w-11/12 md:max-w-6xl mx-auto my-10">
-  <div class="bg-gray-200 w-full shadow-md">
-    <div>
-      <div class="flex">
-        <div class="flex-row">
-          <div>Order Date</div>
-          <div>11 September 2021</div>
+  <div class="w-full">
+    <div class="flex">
+      <div>
+        <div>
+          <!-- Dropdown toggle button -->
+          <div class="flex items-center p-2 rounded-md">
+            <p class="mr-4 border-b-2 w-full pb-2">
+              <i class="fa fa-user" aria-hidden="true"></i>
+              My Profile
+            </p>
+          </div>
+          <!-- Dropdown list -->
+          <div class="rounded-md">
+            <a href="#" class="block px-4 text-sm text-gray-400 hover:text-gray-500"> Profile </a>
+            <a href="#" class="block px-4 text-sm text-gray-400 hover:text-gray-500"> Addresses </a>
+            <a href="profile/user/password" class="block px-4 text-sm text-gray-400 hover:text-gray-500"> Change Password </a>
+          </div>
         </div>
         <div>
-          <div class="flex-row">
-            <div>Order Number</div>
-            <div>#SDF78ASD7FF893</div>
+          <!-- Dropdown toggle button -->
+          <div class="flex items-center p-2 rounded-md">
+            <p class="mr-4">My Purchases</p>
+          </div>
+        </div>
+      </div>
+      <div class="flex bg-gray-100 w-full shadow-md">
+        <div class="flex-row p-2">
+          <div>
+            <span class="text-sm font-semibold"> Order Date </span>
+          </div>
+          <div>
+            <span class="text-sm font-thin"> 11 September 2021 </span>
+          </div>
+          <div class="flex items-center justify-center">
+            <span>test</span>
+          </div>
+        </div>
+        <div>
+          <div class="flex-row p-2">
+            <div>
+              <span class="text-sm font-semibold"> Order Number</span>
+            </div>
+            <div>
+              <span class="text-sm font-thin"> #SDF78ASD7FF893</span>
+            </div>
           </div>
         </div>
       </div>

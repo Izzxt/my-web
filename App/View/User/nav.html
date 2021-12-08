@@ -1,0 +1,25 @@
+{% block profileNavigation %}
+<div>
+  <div>
+    <!-- Dropdown toggle button -->
+    <div class="flex items-center p-2 rounded-md">
+      <p class="mr-4 border-b-2 w-full pb-2">
+        <i class="fa fa-user" aria-hidden="true"></i>
+        My Profile
+      </p>
+    </div>
+    <!-- Dropdown list -->
+    <div class="rounded-md">
+      <a href="#" class="block px-4 text-sm text-gray-400 hover:text-gray-500"> Profile </a>
+      <a href="#" class="block px-4 text-sm text-gray-400 hover:text-gray-500"> Addresses </a>
+      <a href="profile/user/password" class="block px-4 text-sm text-gray-400 hover:text-gray-500"> Change Password </a>
+    </div>
+  </div>
+  <div>
+    <!-- Dropdown toggle button -->
+    <div class="flex items-center p-2 rounded-md">
+      <p class="mr-4">My Purchases</p>
+    </div>
+  </div>
+</div>
+{% endblock %}
